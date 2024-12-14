@@ -1,7 +1,6 @@
 "use client";
 
 import RocketAnimation from "@/components/custom/animation/RocketAnimation";
-import AnimatedGradientText from "@/components/ui/animated-gradient-text";
 import dynamic from "next/dynamic";
 import ShimmerButton from "@/components/ui/shimmer-button";
 import { cn } from "@/lib/utils";
@@ -14,6 +13,11 @@ const Particles = dynamic(() => import("../components/ui/particles"), {
 const Meteors = dynamic(() => import("@/components/ui/meteors"), {
   ssr: false,
 });
+
+const AnimatedGradientText = dynamic(
+  () => import("@/components/ui/animated-gradient-text")
+);
+
 export default function Home() {
   return (
     <div className="relative flex flex-col justify-center w-full overflow-hidden items-center min-h-screen p-8 gap-16 bg-black text-white">
@@ -47,8 +51,6 @@ export default function Home() {
           </span>
           <ChevronRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
         </AnimatedGradientText>
-
-        {/* <SparklesText sparklesCount={10} text="Base packer" /> */}
         <h2 className=" text-[3rem] text-white/80 font-montserrat font-[700] text-center">
           Welcome to Base Packer!
         </h2>
