@@ -3,11 +3,15 @@
 import RocketAnimation from "@/components/custom/animation/RocketAnimation";
 import AnimatedGradientText from "@/components/ui/animated-gradient-text";
 import Meteors from "@/components/ui/meteors";
-import Particles from "@/components/ui/particles";
+import dynamic from "next/dynamic";
 import ShimmerButton from "@/components/ui/shimmer-button";
 import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+
+const Particles = dynamic(() => import("../components/ui/particles"), {
+  ssr: false,
+});
 
 export default function Home() {
   return (
