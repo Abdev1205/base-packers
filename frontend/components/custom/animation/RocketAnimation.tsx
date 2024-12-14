@@ -1,3 +1,5 @@
+"use client";
+
 import { RocketAnimationJson } from "@/public/assetsManager";
 import Lottie from "lottie-react";
 
