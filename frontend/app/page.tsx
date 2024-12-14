@@ -2,7 +2,6 @@
 
 import RocketAnimation from "@/components/custom/animation/RocketAnimation";
 import AnimatedGradientText from "@/components/ui/animated-gradient-text";
-import Meteors from "@/components/ui/meteors";
 import dynamic from "next/dynamic";
 import ShimmerButton from "@/components/ui/shimmer-button";
 import { cn } from "@/lib/utils";
@@ -12,7 +11,9 @@ import Link from "next/link";
 const Particles = dynamic(() => import("../components/ui/particles"), {
   ssr: false,
 });
-
+const Meteors = dynamic(() => import("@/components/ui/meteors"), {
+  ssr: false,
+});
 export default function Home() {
   return (
     <div className="relative flex flex-col justify-center w-full overflow-hidden items-center min-h-screen p-8 gap-16 bg-black text-white">
