@@ -27,7 +27,8 @@ const config: Config = {
   			'shimmer-slide': 'shimmer-slide var(--speed) ease-in-out infinite alternate',
   			'spin-around': 'spin-around calc(var(--speed) * 2) infinite linear',
   			meteor: 'meteor 5s linear infinite',
-  			gradient: 'gradient 8s linear infinite'
+  			gradient: 'gradient 8s linear infinite',
+				spotlight: "spotlight 2s ease .75s 1 forwards",
   		},
   		keyframes: {
   			'shimmer-slide': {
@@ -66,7 +67,17 @@ const config: Config = {
   				to: {
   					backgroundPosition: 'var(--bg-size) 0'
   				}
-  			}
+  			},
+				spotlight: {
+          "0%": {
+            opacity: "0",
+            transform: "translate(-72%, -62%) scale(0.5)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translate(-50%,-40%) scale(1)",
+          },
+        },
   		}
   	}
   },
