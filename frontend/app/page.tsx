@@ -1,7 +1,16 @@
-import dynamic from "next/dynamic";
+import Navbar from "@/components/custom/common/nav/Navbar";
+import Hero from "@/components/custom/home/hero/Hero";
+import React from "react";
 
-const Home = dynamic(() => import("@/components/custom/LaunchPage"), {
-  ssr: false,
-});
+const Home = () => {
+  return (
+    <div className=" bg-black ">
+      <Navbar />
+      <Hero />
+
+      <div className=" h-[200vh] "></div>
+    </div>
+  );
+};
 
 export default Home;
