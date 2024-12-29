@@ -24,11 +24,17 @@ const config: Config = {
   ],
   theme: {
   	extend: {
-			fontFamily: {
-        montserrat: ["var(--font-montserrat)"],
-        openSans: ["var(--font-open-sans)"],
-        poppins: ["var(--font-poppins)"],
-      },
+  		fontFamily: {
+  			montserrat: [
+  				'var(--font-montserrat)'
+  			],
+  			openSans: [
+  				'var(--font-open-sans)'
+  			],
+  			poppins: [
+  				'var(--font-poppins)'
+  			]
+  		},
   		colors: {
   			background: 'var(--background)',
   			foreground: 'var(--foreground)'
@@ -43,7 +49,9 @@ const config: Config = {
   			'spin-around': 'spin-around calc(var(--speed) * 2) infinite linear',
   			meteor: 'meteor 5s linear infinite',
   			gradient: 'gradient 8s linear infinite',
-				spotlight: "spotlight 2s ease .75s 1 forwards",
+  			spotlight: 'spotlight 2s ease .75s 1 forwards',
+  			marquee: 'marquee var(--duration) infinite linear',
+  			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite'
   		},
   		keyframes: {
   			'shimmer-slide': {
@@ -83,16 +91,32 @@ const config: Config = {
   					backgroundPosition: 'var(--bg-size) 0'
   				}
   			},
-				spotlight: {
-          "0%": {
-            opacity: "0",
-            transform: "translate(-72%, -62%) scale(0.5)",
-          },
-          "100%": {
-            opacity: "1",
-            transform: "translate(-50%,-40%) scale(1)",
-          },
-        },
+  			spotlight: {
+  				'0%': {
+  					opacity: '0',
+  					transform: 'translate(-72%, -62%) scale(0.5)'
+  				},
+  				'100%': {
+  					opacity: '1',
+  					transform: 'translate(-50%,-40%) scale(1)'
+  				}
+  			},
+  			marquee: {
+  				from: {
+  					transform: 'translateX(0)'
+  				},
+  				to: {
+  					transform: 'translateX(calc(-100% - var(--gap)))'
+  				}
+  			},
+  			'marquee-vertical': {
+  				from: {
+  					transform: 'translateY(0)'
+  				},
+  				to: {
+  					transform: 'translateY(calc(-100% - var(--gap)))'
+  				}
+  			}
   		}
   	}
   },
