@@ -12,7 +12,7 @@ const Hero = () => {
   const people = [
     {
       id: 1,
-      name: "JavaScript",
+      name: "React Js",
       image: "https://i.postimg.cc/TY9H1Zbs/image.png",
     },
     {
