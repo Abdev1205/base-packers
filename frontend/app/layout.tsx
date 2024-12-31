@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { montserrat, openSans, poppins } from "@/public/font";
 import "./globals.css";
+import ConfigProviders from "@/provider/ConfigProvider";
 
 export const metadata: Metadata = {
   title: "Base Packer",
@@ -17,7 +18,7 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} ${openSans.variable} ${poppins.variable}`}
       >
-        {children}
+        <ConfigProviders>{children}</ConfigProviders>
       </body>
     </html>
   );

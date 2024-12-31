@@ -51,7 +51,8 @@ const config: Config = {
   			gradient: 'gradient 8s linear infinite',
   			spotlight: 'spotlight 2s ease .75s 1 forwards',
   			marquee: 'marquee var(--duration) infinite linear',
-  			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite'
+  			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
+				glow: 'glow 1.5s infinite ease-in-out',
   		},
   		keyframes: {
   			'shimmer-slide': {
@@ -116,7 +117,11 @@ const config: Config = {
   				to: {
   					transform: 'translateY(calc(-100% - var(--gap)))'
   				}
-  			}
+  			},
+				glow: {
+          '0%, 100%': { filter: 'drop-shadow(0 0 5px rgba(255, 0, 0, 0.5))' },
+          '50%': { filter: 'drop-shadow(0 0 25px rgba(255, 0, 0, 1))' },
+        },
   		}
   	}
   },
@@ -131,6 +136,7 @@ const config: Config = {
             )}")`,
           }),
         },
+				
         { values: flattenColorPalette(theme("backgroundColor")), type: "color" }
       );
     },],
