@@ -6,9 +6,13 @@ import React from "react";
 import { SingleLink } from "./SingleLink";
 import { Button } from "@/components/ui/button";
 
-const Navbar = () => {
+const Navbar = ({ primary = true }: { primary?: boolean }) => {
   return (
-    <div className=" supports-backdrop-blur:bg-background/90 fixed w-full  top-0 z-50 bg-background/90 backdrop-blur-lg md:bg-background/40 flex justify-between h-[4rem] px-[5rem] ">
+    <div
+      className={`supports-backdrop-blur:bg-background/90 fixed w-full  top-0 z-50 bg-background/90 backdrop-blur-lg md:bg-background/40 flex justify-between h-[4rem] px-[5rem] ${
+        primary ? " " : " border-b border-white/10 "
+      }  `}
+    >
       <div className="  flex items-center gap-[.5rem] ">
         <Image src={LogoImage} alt="logo" className=" w-[2.5rem] " />
         <h2 className=" text-white/80 font-poppins font-[400] text-[1.4rem] ">
