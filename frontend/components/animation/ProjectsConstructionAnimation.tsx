@@ -1,3 +1,5 @@
+"use client";
+
 import { ProjectUnderConstruction } from "@/public/assetsManager";
 import Lottie from "lottie-react";
 
