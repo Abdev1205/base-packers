@@ -45,13 +45,8 @@ const TemplatePage = () => {
         <div className=" flex gap-[.5rem]  ">
           <Suspense fallback={<div>Loading...</div>}>
             <SearchBar />
+            <TemplateFilter />
           </Suspense>
-          {/* <TemplateSorter
-            options={TemplateSort}
-            selected={templateSortValue}
-            onChange={setTemplateSortValue}
-          /> */}
-          <TemplateFilter />
         </div>
       </div>
       <div className=" flex-col w-full flex px-[5rem]  ">
