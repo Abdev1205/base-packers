@@ -138,6 +138,32 @@ export const techStack = [
   },
 ];
 
+export const techTags = [
+  { id: 1, name: "React JS", image: "https://i.postimg.cc/TY9H1Zbs/image.png" },
+  {
+    id: 2,
+    name: "Node JS",
+    image: "https://i.postimg.cc/KctWSK8x/nodejs-inner.webp",
+  },
+  {
+    id: 3,
+    name: "MongoDB",
+    image:
+      "https://i.postimg.cc/tRKGjQbG/d6e4b7bd3a0ae010ed3107618ee5128f5c6d919f-400x400.png",
+  },
+  { id: 4, name: "Next JS", image: "https://i.postimg.cc/W3qYWzhF/image.jpg" },
+  {
+    id: 5,
+    name: "PostgreSQL",
+    image: "https://i.postimg.cc/SQ73wXgC/postgress-logo.webp",
+  },
+  {
+    id: 6,
+    name: "Tailwind CSS",
+    image: "https://i.postimg.cc/rpwSgwf1/plus-tailwind.jpg",
+  },
+];
+
 export const templateCardData = [
   {
     id: "1",

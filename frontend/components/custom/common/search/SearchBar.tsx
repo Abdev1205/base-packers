@@ -24,11 +24,15 @@ const SearchBar = () => {
   // Debounced search to minimize unnecessary navigation calls
   const handleSearch = debounce(() => {
     const sanitizedQuery = searchText.trim();
+    const newParams = new URLSearchParams(searchParams.toString());
+
     if (sanitizedQuery) {
-      router.push(`?q=${sanitizedQuery}`);
+      newParams.set("q", sanitizedQuery);
     } else {
-      router.push(`${pathname}/`); // Navigate without `q` if search is empty
+      newParams.delete("q");
     }
+
+    router.push(`?${newParams.toString()}`);
   }, 300);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +49,16 @@ const SearchBar = () => {
 
   const clearSearch = () => {
     setSearchText("");
-    router.push(`${pathname}/`); // Clear the search query from the URL
+
+    // Create a new URLSearchParams object
+    const params = new URLSearchParams(searchParams.toString());
+
+    // Remove the 'q' parameter
+    params.delete("q");
+
+    // Update the URL with the modified parameters
+    const newQuery = params.toString();
+    router.push(newQuery ? `?${newQuery}` : pathname); // Keep other params, or fallback to pathname
   };
 
   return (
