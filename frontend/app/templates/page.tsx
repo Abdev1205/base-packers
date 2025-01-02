@@ -42,7 +42,7 @@ const TemplatePage = () => {
   return (
     <>
       <div className=" flex w-full  absolute top-[3.8rem]  py-[.5rem] px-[1rem] z-[200] justify-end ">
-        <div className=" flex gap-[.5rem]  ">
+        <div className=" flex fixed   gap-[.5rem]  ">
           <Suspense fallback={<div>Loading...</div>}>
             <SearchBar />
             <TemplateFilter />
