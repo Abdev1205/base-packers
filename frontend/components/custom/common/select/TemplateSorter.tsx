@@ -48,7 +48,7 @@ const TemplateSorter: React.FC<TemplateSorterProps> = ({
       <Select value={selected || undefined} onValueChange={handleSelectType}>
         <SelectTrigger className="flex border-none text-white/50 items-center gap-[.3rem] cursor-pointer bg-[#2b2a2a] p-[.3rem] px-[.5rem] rounded-[.3rem] focus:ring-0">
           <LuListFilter className="text-lg  " />
-          <span>Sort</span>
+          {/* <span>Sort</span> */}
         </SelectTrigger>
         <SelectContent className=" rounded-[.3rem] bg-[#2b2a2a] border-none text-white/70">
           {options.map((option) => (
