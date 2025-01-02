@@ -8,7 +8,7 @@ import { HeroHighlight } from "@/components/ui/hero-highlight";
 import { templateCardData } from "@/constants/constant";
 import { StarredCardImage, UnStarredCardImage } from "@/public/assetsManager";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 
 const TemplateSort = [
   {
@@ -40,37 +40,38 @@ const TemplatePage = () => {
   useEffect(() => {}, [refresh]);
 
   return (
-    <div className=" flex-col w-full flex px-[5rem]  ">
-      <div className=" flex w-full  sticky top-[.5rem] z-[200] justify-between ">
-        <div className="flex gap-[1rem] ">
-          <TemplateFilter />
-          <SearchBar />
-        </div>
-
-        <div>
-          <TemplateSorter
+    <>
+      <div className=" flex w-full  absolute top-[3.8rem]  py-[.5rem] px-[1rem] z-[200] justify-end ">
+        <div className=" flex gap-[.5rem]  ">
+          <Suspense fallback={<div>Loading...</div>}>
+            <SearchBar />
+          </Suspense>
+          {/* <TemplateSorter
             options={TemplateSort}
             selected={templateSortValue}
             onChange={setTemplateSortValue}
-          />
+          /> */}
+          <TemplateFilter />
         </div>
       </div>
-      <div className=" flex gap-[1rem] justify-center flex-wrap my-[2rem] ">
-        {templateCardData.map((template, idx) => (
-          // <Image
-          //   src={template.img}
-          //   key={idx}
-          //   alt="template"
-          //   className=" w-[20rem]  "
-          // />
-          <TemplateCard
-            key={idx}
-            data={template}
-            handleStarTemplate={handleStarTemplate}
-          />
-        ))}
+      <div className=" flex-col w-full flex px-[5rem]  ">
+        <div className=" flex gap-[1rem] justify-center flex-wrap my-[2rem] ">
+          {templateCardData.map((template, idx) => (
+            // <Image
+            //   src={template.img}
+            //   key={idx}
+            //   alt="template"
+            //   className=" w-[20rem]  "
+            // />
+            <TemplateCard
+              key={idx}
+              data={template}
+              handleStarTemplate={handleStarTemplate}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
