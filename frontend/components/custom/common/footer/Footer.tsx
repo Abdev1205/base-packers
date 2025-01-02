@@ -32,7 +32,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className=" border-t border-neutral-800 text-white py-8 px-[5rem] mt-[6rem] flex flex-col ">
+    <footer className=" border-t border-neutral-800 bg-black text-white py-8 px-[5rem] mt-[6rem] flex flex-col ">
       <div className="flex justify-between items-center">
         {/* Left Section - Logo and Tagline */}
         <div className="flex flex-col gap-[.5rem] w-[30rem]  ">
