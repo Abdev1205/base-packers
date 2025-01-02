@@ -28,13 +28,13 @@ const TemplateSorter: React.FC<TemplateSorterProps> = ({
   };
 
   return (
-    <div className="flex items-center w-full">
+    <div className="flex  items-center  w-full">
       {/* Selected Filter Display */}
       <div className=" ml-[-7rem] absolute   ">
         {selected && (
           <div className="flex  items-center text-white/50 ">
-            <div className="w-0 h-0 border-t-[14px] border-b-[14px] border-r-[20px] border-transparent border-r-[#2b2a2a] "></div>
-            <div className="text-sm flex items-center gap-[.5rem] bg-[#2b2a2a] w-fit px-[.4rem] py-[.3rem]">
+            <div className="w-0 h-0 border-t-[14px] border-b-[14px] border-r-[20px] border-transparent border-r-[#303030] "></div>
+            <div className="text-sm flex items-center gap-[.5rem] bg-[#303030] w-fit px-[.4rem] py-[.3rem]">
               {`${selected}`}
               <RiCloseLargeLine
                 onClick={handleRemoveType}
@@ -46,9 +46,9 @@ const TemplateSorter: React.FC<TemplateSorterProps> = ({
       </div>
       {/* Filter Dropdown */}
       <Select value={selected || undefined} onValueChange={handleSelectType}>
-        <SelectTrigger className="flex border-none text-white/50 items-center gap-[.3rem] cursor-pointer bg-[#2b2a2a] p-[.3rem] px-[.5rem] rounded-[.3rem] focus:ring-0">
+        <SelectTrigger className="flex h-[2rem] border-none text-white/50 items-center gap-[.3rem] cursor-pointer bg-[#383838] p-[.2rem] px-[.5rem] rounded-[.3rem] focus:ring-0">
           <LuListFilter className="text-lg  " />
-          {/* <span>Sort</span> */}
+          <span>Sort</span>
         </SelectTrigger>
         <SelectContent className=" rounded-[.3rem] bg-[#2b2a2a] border-none text-white/70">
           {options.map((option) => (
