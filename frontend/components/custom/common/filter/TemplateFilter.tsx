@@ -9,38 +9,13 @@ import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
+import { techTags } from "@/constants/constant";
 
 interface TechTag {
   id: number;
   name: string;
   image: string;
 }
-
-const techTags: TechTag[] = [
-  { id: 1, name: "React JS", image: "https://i.postimg.cc/TY9H1Zbs/image.png" },
-  {
-    id: 2,
-    name: "Node JS",
-    image: "https://i.postimg.cc/KctWSK8x/nodejs-inner.webp",
-  },
-  {
-    id: 3,
-    name: "MongoDB",
-    image:
-      "https://i.postimg.cc/tRKGjQbG/d6e4b7bd3a0ae010ed3107618ee5128f5c6d919f-400x400.png",
-  },
-  { id: 4, name: "Next JS", image: "https://i.postimg.cc/W3qYWzhF/image.jpg" },
-  {
-    id: 5,
-    name: "PostgreSQL",
-    image: "https://i.postimg.cc/SQ73wXgC/postgress-logo.webp",
-  },
-  {
-    id: 6,
-    name: "Tailwind CSS",
-    image: "https://i.postimg.cc/rpwSgwf1/plus-tailwind.jpg",
-  },
-];
 
 const TemplateFilter: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -96,13 +71,16 @@ const TemplateFilter: React.FC = () => {
   };
 
   const handleSearch = () => {
-    const filter = tags.map((tag) => tag.name).join(",");
-    const queryString = new URLSearchParams({
-      ...(filter ? { filter } : {}),
-      ...(sortValue ? { sort: sortValue } : {}),
-    }).toString();
+    const newParams = new URLSearchParams(searchParams.toString());
 
-    router.push(`/templates?${queryString}`);
+    const filter = tags.map((tag) => tag.name).join(",");
+    if (filter) newParams.set("filter", filter);
+    else newParams.delete("filter");
+
+    if (sortValue) newParams.set("sort", sortValue);
+    else newParams.delete("sort");
+
+    router.push(`?${newParams.toString()}`);
     setDropdownOpen(false);
   };
 
