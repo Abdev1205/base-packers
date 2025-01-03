@@ -5,30 +5,32 @@ const CreatingAccount = dynamic(
   { ssr: false }
 );
 import { MultiStepLoader } from "@/components/ui/multi-step-loader";
-import React, { useState } from "react";
-// import { useClerk } from "@clerk/clerk-react";
+import React, { useEffect, useState } from "react";
 import { HeroHighlight } from "@/components/ui/hero-highlight";
 import dynamic from "next/dynamic";
+import { useClerk } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 const SSOCallback: React.FC = () => {
-  // const { handleRedirectCallback } = useClerk();
+  const { handleRedirectCallback } = useClerk();
+  const router = useRouter();
 
-  // useEffect(() => {
-  //   const completeSignIn = async () => {
-  //     try {
-  //       await handleRedirectCallback({}, (to: string) => {
-  //         return new Promise((resolve) => {
-  //           navigate(to, { replace: true });
-  //           resolve(true);
-  //         });
-  //       });
-  //     } catch (error) {
-  //       console.error("Error completing sign-in:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const completeSignIn = async () => {
+      try {
+        await handleRedirectCallback({}, (to: string) => {
+          return new Promise((resolve) => {
+            router.replace(to);
+            resolve(true);
+          });
+        });
+      } catch (error) {
+        console.error("Error completing sign-in:", error);
+      }
+    };
 
-  //   completeSignIn();
-  // }, [handleRedirectCallback, navigate]);
+    completeSignIn();
+  }, [handleRedirectCallback, router]);
 
   const loadingStates = [
     {
