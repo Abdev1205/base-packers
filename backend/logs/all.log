@@ -1,0 +1,11 @@
+2025-01-03 17:34:38:3438 [35mhttp[39m: [35m::ffff:127.0.0.1 POST /api/v1/auth/webhook/clerk 200 45 - 778.621 ms[39m
+2025-01-03 17:38:15:3815 [35mhttp[39m: [35m::ffff:127.0.0.1 POST /api/v1/auth/webhook/clerk 500 35 - 1.796 ms[39m
+2025-01-03 17:42:55:4255 [35mhttp[39m: [35m::ffff:127.0.0.1 POST /api/v1/auth/webhook/clerk 200 45 - 840.843 ms[39m
+2025-01-03 17:43:26:4326 [35mhttp[39m: [35m::ffff:127.0.0.1 POST /api/v1/auth/webhook/clerk 500 35 - 387.345 ms[39m
+2025-01-03 17:48:41:4841 [35mhttp[39m: [35m::ffff:127.0.0.1 POST /api/v1/auth/webhook/clerk 200 45 - 843.145 ms[39m
+2025-01-03 17:50:25:5025 [35mhttp[39m: [35m::ffff:127.0.0.1 POST /api/v1/auth/webhook/clerk 200 45 - 386.707 ms[39m
+2025-01-03 17:52:44:5244 [35mhttp[39m: [35m::ffff:127.0.0.1 POST /api/v1/auth/webhook/clerk 200 45 - 341.076 ms[39m
+2025-01-03 17:53:17:5317 [35mhttp[39m: [35m::ffff:127.0.0.1 POST /api/v1/auth/webhook/clerk 200 45 - 384.342 ms[39m
+2025-01-03 17:55:10:5510 [35mhttp[39m: [35m::ffff:127.0.0.1 POST /api/v1/auth/webhook/clerk 200 45 - 1088.660 ms[39m
+2025-01-03 17:56:01:561 [35mhttp[39m: [35m::ffff:127.0.0.1 POST /api/v1/auth/webhook/clerk 200 45 - 364.827 ms[39m
+2025-01-03 17:57:46:5746 [35mhttp[39m: [35m::ffff:127.0.0.1 POST /api/v1/auth/webhook/clerk 200 45 - 635.053 ms[39m
