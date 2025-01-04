@@ -1,15 +1,18 @@
-import { Request, Response } from 'express';
-import prisma from '../../config/database.js';
-import { Webhook,WebhookRequiredHeaders } from 'svix';
-import ENV from '../../config/ENV.js';
-import { WebhookEvent } from '@clerk/clerk-sdk-node';
+import { Request, Response } from "express";
+import prisma from "../../config/database.js";
+import { Webhook, WebhookRequiredHeaders } from "svix";
+import ENV from "../../config/ENV.js";
+import { WebhookEvent } from "@clerk/clerk-sdk-node";
+import AuthController from "./AuthController.js";
 
 class ClerkAccountWebhook {
   static async handleWebhook(req: Request, res: Response) {
-    const CLERK_SIGNING_SECRET = ENV.CLERK_SIGNING_SECRET
+    const CLERK_SIGNING_SECRET = ENV.CLERK_SIGNING_SECRET;
 
     if (!CLERK_SIGNING_SECRET) {
-      res.status(500).send({message:"Missing CLERK_SIGNING_SECRET environment variable"});
+      res
+        .status(500)
+        .send({ message: "Missing CLERK_SIGNING_SECRET environment variable" });
     }
 
     try {
@@ -21,31 +24,40 @@ class ClerkAccountWebhook {
         "svix-signature": req.headers["svix-signature"] as string,
       };
 
-      if (!svixHeaders["svix-id"] || !svixHeaders["svix-timestamp"] || !svixHeaders["svix-signature"]) {
-        return res.status(400).send({ message: 'Missing required headers' });
+      if (
+        !svixHeaders["svix-id"] ||
+        !svixHeaders["svix-timestamp"] ||
+        !svixHeaders["svix-signature"]
+      ) {
+        return res.status(400).send({ message: "Missing required headers" });
       }
-  
-      const payload = req.body; 
-  
+
+      const payload = req.body;
+
       // Verify the webhook
-      const event = svix.verify(JSON.stringify(payload), svixHeaders) as WebhookEvent;
-      
+      const event = svix.verify(
+        JSON.stringify(payload),
+        svixHeaders
+      ) as WebhookEvent;
+
       if (!event) {
-        return res.status(400).send({ message: 'Invalid webhook signature' });
+        return res.status(400).send({ message: "Invalid webhook signature" });
       }
 
       const { type, data } = event;
 
+      console.log("webhook recived ", type);
+
       switch (type) {
-        case 'user.created':
+        case "user.created":
           await ClerkAccountWebhook.handleUserCreated(data);
           break;
 
-        case 'user.updated':
+        case "user.updated":
           await ClerkAccountWebhook.handleUserUpdated(data);
           break;
 
-        case 'user.deleted':
+        case "user.deleted":
           await ClerkAccountWebhook.handleUserDeleted(data);
           break;
 
@@ -53,17 +65,37 @@ class ClerkAccountWebhook {
           console.log(`Unhandled event type: ${type}`);
       }
 
-      res.status(200).send({ message: 'Webhook processed successfully.' });
+      res.status(200).send({ message: "Webhook processed successfully." });
     } catch (error) {
-      console.error('Error processing webhook:', error);
-      res.status(500).send({ message: 'Internal Server Error' });
+      console.error("Error processing webhook:", error);
+      res.status(500).send({ message: "Internal Server Error" });
     }
   }
 
   static async handleUserCreated(data: any) {
-    const { id, first_name, last_name, email_addresses, username, profile_image_url } = data;
+    console.log("Handle User created is called");
+    if (!data) {
+      return new Error("Missing user data");
+    }
+
+    const {
+      id,
+      first_name,
+      last_name,
+      email_addresses,
+      username,
+      profile_image_url,
+    } = data;
 
     const email = email_addresses?.[0]?.email_address || null;
+
+    const existingUser = await prisma.user.findUnique({
+      where: { id, email },
+    });
+
+    if (existingUser) {
+      return new Error(`User already exists: ${id}`);
+    }
 
     await prisma.user.create({
       data: {
@@ -74,12 +106,20 @@ class ClerkAccountWebhook {
         avatar: profile_image_url,
       },
     });
+    await AuthController.getGithubToken(id);
 
     console.log(`User created: ${id}`);
   }
 
   static async handleUserUpdated(data: any) {
-    const { id, first_name, last_name, email_addresses, username, profile_image_url } = data;
+    const {
+      id,
+      first_name,
+      last_name,
+      email_addresses,
+      username,
+      profile_image_url,
+    } = data;
 
     const email = email_addresses?.[0]?.email_address || null;
 
@@ -98,7 +138,6 @@ class ClerkAccountWebhook {
     } catch (error) {
       return new Error(`Failed to update user: ${id}`);
     }
-
   }
 
   static async handleUserDeleted(data: any) {
@@ -106,27 +145,25 @@ class ClerkAccountWebhook {
 
     try {
       if (!id) {
-        return new Error('Missing user ID');
+        return new Error("Missing user ID");
       }
-  
+
       const user = await prisma.user.findUnique({
         where: { id },
       });
-  
+
       if (!user) {
         return new Error(`User not found: ${id}`);
       }
-  
+
       await prisma.user.delete({
         where: { id },
       });
-  
+
       console.log(`User deleted: ${id}`);
     } catch (error) {
       return new Error(`Failed to delete user: ${id}`);
-      
     }
-
   }
 }
 
