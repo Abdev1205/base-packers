@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BsSliders } from "react-icons/bs";
 import { X } from "lucide-react"; // ShadCN-compatible close icon
 import TemplateSorter from "@/components/custom/common/select/TemplateSorter";
@@ -9,23 +9,22 @@ import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
-import { techTags } from "@/constants/constant";
-
-interface TechTag {
-  id: number;
-  name: string;
-  image: string;
-}
+// import { skillTags } from "@/constants/constant";
+import { useSkillTagStore } from "@/provider/store/useSkillTagStore";
+import { SkillTagtype } from "@/types";
+import useSkillTags from "@/hooks/useSkillTags";
 
 const TemplateFilter: React.FC = () => {
+  const { skillTags } = useSkillTags();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [sortValue, setSortValue] = useState("");
   const [query, setQuery] = useState("");
-  const [tags, setTags] = useState<TechTag[]>([]);
-  const [suggestions, setSuggestions] = useState<TechTag[]>([]);
+  const [tags, setTags] = useState<SkillTagtype[]>([]);
+  const [suggestions, setSuggestions] = useState<SkillTagtype[]>(skillTags);
   const [activeIndex, setActiveIndex] = useState(-1); // Track active suggestion
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -33,7 +32,7 @@ const TemplateFilter: React.FC = () => {
     setActiveIndex(-1); // Reset active index
 
     if (value.trim()) {
-      const filteredSuggestions = techTags.filter(
+      const filteredSuggestions = skillTags.filter(
         (tag) =>
           tag.name.toLowerCase().includes(value.toLowerCase()) &&
           !tags.some((t) => t.id === tag.id)
@@ -44,7 +43,7 @@ const TemplateFilter: React.FC = () => {
     }
   };
 
-  const handleAddTag = (tag: TechTag) => {
+  const handleAddTag = (tag: SkillTagtype) => {
     setTags((prev) => [...prev, tag]);
     setQuery("");
     setSuggestions([]);
@@ -73,7 +72,7 @@ const TemplateFilter: React.FC = () => {
   const handleSearch = () => {
     const newParams = new URLSearchParams(searchParams.toString());
 
-    const filter = tags.map((tag) => tag.name).join(",");
+    const filter = tags.map((tag) => tag.tagValue).join(",");
     if (filter) newParams.set("filter", filter);
     else newParams.delete("filter");
 
@@ -84,6 +83,16 @@ const TemplateFilter: React.FC = () => {
     setDropdownOpen(false);
   };
 
+  const handleInputFocus = () => {
+    setIsFocused(true);
+    if (query.trim() === "") {
+      const remainingSuggestions = skillTags.filter(
+        (tag) => !tags.some((t) => t.id === tag.id)
+      );
+      setSuggestions(remainingSuggestions);
+    }
+  };
+
   useEffect(() => {
     const filter = searchParams.get("filter");
     const sort = searchParams.get("sort");
@@ -91,15 +100,15 @@ const TemplateFilter: React.FC = () => {
     if (filter) {
       const filterTags = filter
         .split(",")
-        .map((name) => techTags.find((tag) => tag.name === name))
-        .filter(Boolean) as TechTag[];
+        .map((name) => skillTags.find((tag) => tag.tagValue === name))
+        .filter(Boolean) as SkillTagtype[];
       setTags(filterTags);
     }
 
     if (sort) {
       setSortValue(sort);
     }
-  }, [searchParams]);
+  }, [searchParams, skillTags]);
 
   return (
     <div className="relative">
@@ -134,11 +143,13 @@ const TemplateFilter: React.FC = () => {
               className="bg-[#2b2a2a] border-white/10 text-white/50"
               placeholder="Add tech tags"
               value={query}
+              // ref={tagInputRef}
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
+              onFocus={handleInputFocus}
             />
             {suggestions.length > 0 && (
-              <div className="absolute z-10 mt-1 w-full bg-[#1e1e1e] border border-white/10 rounded-md shadow-lg">
+              <div className="absolute z-[11] max-h-[18rem] overflow-auto mt-1 w-full bg-[#1e1e1e] border border-white/10 rounded-md shadow-lg">
                 {suggestions.map((tag, index) => (
                   <div
                     key={tag.id}
@@ -150,7 +161,7 @@ const TemplateFilter: React.FC = () => {
                     onClick={() => handleAddTag(tag)}
                   >
                     <Image
-                      src={tag.image}
+                      src={tag.imageUrl}
                       alt={tag.name}
                       width={100}
                       height={100}
@@ -173,7 +184,7 @@ const TemplateFilter: React.FC = () => {
                 className="bg-[#3b3b3b] rounded-full h-fit text-sm text-white/40 font-[400] hover:bg-[#4b4b4b] cursor-pointer p-0 pr-[.4rem] gap-2 flex items-center"
               >
                 <Image
-                  src={tag.image}
+                  src={tag.imageUrl}
                   alt={tag.name}
                   width={100}
                   height={100}

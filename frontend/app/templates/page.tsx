@@ -2,32 +2,12 @@
 
 import TemplateFilter from "@/components/custom/common/filter/TemplateFilter";
 import SearchBar from "@/components/custom/common/search/SearchBar";
-import TemplateSorter from "@/components/custom/common/select/TemplateSorter";
 import TemplateCard from "@/components/custom/templates/TemplateCard";
-import { HeroHighlight } from "@/components/ui/hero-highlight";
 import { templateCardData } from "@/constants/constant";
-import { StarredCardImage, UnStarredCardImage } from "@/public/assetsManager";
-import Image from "next/image";
 import React, { Suspense, useEffect, useState } from "react";
-
-const TemplateSort = [
-  {
-    label: "Most Popular",
-    value: "popular",
-  },
-  {
-    label: "Newest",
-    value: "newest",
-  },
-  {
-    label: "Oldest",
-    value: "oldest",
-  },
-];
 
 const TemplatePage = () => {
   const [refresh, setRefresh] = useState(false);
-  const [templateSortValue, setTemplateSortValue] = useState("");
 
   const handleStarTemplate = (id: string) => {
     const starObj = templateCardData.find((template) => template.id === id);
