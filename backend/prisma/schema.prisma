@@ -14,13 +14,36 @@ datasource db {
 }
 
 model User {
-  id               String   @id @default(uuid())
+  id               String     @id @default(uuid())
   name             String
-  email            String?  @unique
-  username         String?  @unique
+  email            String?    @unique
+  username         String?    @unique
   avatar           String?
-  starredTemplates String[]
-  createdTemplates String[]
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  starredTemplates Template[] @relation("StarredBy")
+  createdTemplates Template[] @relation("CreatedBy")
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+}
+
+model Template {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  createdBy   User     @relation("CreatedBy", fields: [createdById], references: [id])
+  createdById String
+  starredBy   User[]   @relation("StarredBy")
+  starCount   Int      @default(0)
+  skills      Skill[]  @relation("TemplateSkills")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Skill {
+  id        String     @id @default(uuid())
+  name      String
+  tagValue  String
+  imageUrl  String?
+  templates Template[] @relation("TemplateSkills")
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 }
