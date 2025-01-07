@@ -3,6 +3,7 @@ import "dotenv/config";
 import cors from "cors";
 import AuthRoutes from "./api/v1/auth.js";
 import SkillsRoutes from "./api/v1/skill.js";
+import ReposRoutes from "./api/v1/repo.js";
 import morganMiddleware from "./middleware/morgan.middleware.js";
 import ENV from "./config/ENV.js";
 const app: Application = express();
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morganMiddleware);
 app.use("/api/v1/auth", AuthRoutes);
 app.use("/api/v1/skills", SkillsRoutes);
+app.use("/api/v1/repos", ReposRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   return res.send("It's working 🙌");
