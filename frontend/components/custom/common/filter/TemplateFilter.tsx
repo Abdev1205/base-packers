@@ -13,6 +13,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useSkillTagStore } from "@/provider/store/useSkillTagStore";
 import { SkillTagtype } from "@/types";
 import useSkillTags from "@/hooks/useSkillTags";
+import TechTagSelect from "../select/TechTagSelect";
 
 const TemplateFilter: React.FC = () => {
   const { skillTags } = useSkillTags();
@@ -21,7 +22,7 @@ const TemplateFilter: React.FC = () => {
   const [query, setQuery] = useState("");
   const [tags, setTags] = useState<SkillTagtype[]>([]);
   const [suggestions, setSuggestions] = useState<SkillTagtype[]>(skillTags);
-  const [activeIndex, setActiveIndex] = useState(-1); // Track active suggestion
+  const [activeIndex, setActiveIndex] = useState(-1);
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isFocused, setIsFocused] = useState(false);
@@ -93,6 +94,11 @@ const TemplateFilter: React.FC = () => {
     }
   };
 
+  const handleInputBlur = () => {
+    setIsFocused(false);
+    setSuggestions([]);
+  };
+
   useEffect(() => {
     const filter = searchParams.get("filter");
     const sort = searchParams.get("sort");
@@ -111,7 +117,7 @@ const TemplateFilter: React.FC = () => {
   }, [searchParams, skillTags]);
 
   return (
-    <div className="relative">
+    <div onClick={handleInputBlur} className="relative">
       <div
         className="flex h-9 items-center gap-2 cursor-pointer border-2 bg-[#2b2a2a] border-white/10 p-2 rounded-md focus:ring-0"
         onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -134,73 +140,19 @@ const TemplateFilter: React.FC = () => {
               />
             </div>
           </div>
+          {/* Tech Tags Section */}
 
-          <div className="relative mb-4">
-            <h2 className="text-white/60 mb-[1rem] font-[400] text-[1.2rem]">
-              Tech Tags
-            </h2>
-            <Input
-              className="bg-[#2b2a2a] border-white/10 text-white/50"
-              placeholder="Add tech tags"
-              value={query}
-              // ref={tagInputRef}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
-              onFocus={handleInputFocus}
-            />
-            {suggestions.length > 0 && (
-              <div className="absolute z-[11] max-h-[18rem] overflow-auto mt-1 w-full bg-[#1e1e1e] border border-white/10 rounded-md shadow-lg">
-                {suggestions.map((tag, index) => (
-                  <div
-                    key={tag.id}
-                    className={`px-3 py-2 flex items-center gap-2 cursor-pointer ${
-                      index === activeIndex
-                        ? "bg-[#3b3b3b]"
-                        : "hover:bg-[#3b3b3b]"
-                    } text-white`}
-                    onClick={() => handleAddTag(tag)}
-                  >
-                    <Image
-                      src={tag.imageUrl}
-                      alt={tag.name}
-                      width={100}
-                      height={100}
-                      className="w-6 h-6 object-cover rounded-full"
-                    />
-                    <p className="text-[.8rem] font-[400] text-white/50">
-                      {tag.name}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="flex flex-wrap max-h-[15rem] overflow-y-auto items-start justify-start gap-2">
-            {tags.map((tag) => (
-              <Badge
-                key={tag.id}
-                variant="secondary"
-                className="bg-[#3b3b3b] rounded-full h-fit text-sm text-white/40 font-[400] hover:bg-[#4b4b4b] cursor-pointer p-0 pr-[.4rem] gap-2 flex items-center"
-              >
-                <Image
-                  src={tag.imageUrl}
-                  alt={tag.name}
-                  width={100}
-                  height={100}
-                  className="size-[1.5rem] object-cover rounded-full"
-                />
-                <p className="text-[.8rem] font-openSans text-white/40 font-[400]">
-                  {tag.name}
-                </p>
-                <X
-                  className="cursor-pointer text-white/50"
-                  size={14}
-                  onClick={() => handleRemoveTag(tag.id)}
-                />
-              </Badge>
-            ))}
-          </div>
+          <TechTagSelect
+            activeIndex={activeIndex}
+            handleAddTag={handleAddTag}
+            handleKeyDown={handleKeyDown}
+            handleInputChange={handleInputChange}
+            query={query}
+            suggestions={suggestions}
+            tags={tags}
+            handleRemoveTag={handleRemoveTag}
+            handleInputFocus={handleInputFocus}
+          />
 
           <div className="mt-4 flex justify-end">
             <Button
