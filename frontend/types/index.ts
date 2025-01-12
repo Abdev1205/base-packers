@@ -1,5 +1,5 @@
 export type SkillTagtype = {
-  id: number;
+  id: string | number;
   name: string;
   tagValue: string;
   imageUrl: string;
@@ -27,3 +27,69 @@ export interface GitRepo {
   license: string | null; // License type, if any
   forksCount: number; // Number of forks of the repository
 }
+
+export interface TemplateApiRes {
+  id: string;
+  name: string;
+  description: string;
+  guidelines: string;
+  repoId: number;
+  createdById: string;
+  starCount: number;
+  createdAt: string;
+  updatedAt: string;
+  starredBy: string[];
+  skills: SkillTagtype[];
+  repo: {
+    id: number;
+    name: string;
+    description: string;
+    htmlUrl: string;
+    topics: string[];
+    cloneUrl: string;
+    language: string;
+    stargazersCount: number;
+    ownerId: string;
+    defaultBranch: string;
+    updatedAt: string;
+    size: number;
+    license: null;
+    forksCount: number;
+    owner: {
+      id: number;
+      login: string;
+      avatarUrl: string;
+      profileUrl: string;
+    };
+  };
+  createdBy: {
+    id: string;
+    name: string;
+    email: string;
+    username: string;
+    avatar: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+}
+
+export type TemplateCardDataType = {
+  id: number | string;
+  title: string;
+  description: string;
+  tags: SkillTagtype[];
+  stars: number;
+  guidelines?: string;
+  author: {
+    name: string;
+    avatar?: string;
+    githubUrl: string;
+    username?: string;
+  };
+  repoUrl: string;
+  lastUpdated: string;
+  actions: {
+    preview: string;
+    star: boolean;
+  };
+};

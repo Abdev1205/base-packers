@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -27,23 +21,53 @@ model User {
 
 model Template {
   id          String   @id @default(uuid())
-  name        String
-  description String
+  name        String // Name of the template
+  description String // Description of the template
+  guidelines  String? // Guidelines for the template (optional)
+  repo        GitRepo? @relation(fields: [repoId], references: [id])
+  repoId      Int? // Foreign key for the repository
   createdBy   User     @relation("CreatedBy", fields: [createdById], references: [id])
-  createdById String
+  createdById String // Foreign key for the user who created the template
   starredBy   User[]   @relation("StarredBy")
-  starCount   Int      @default(0)
-  skills      Skill[]  @relation("TemplateSkills")
+  starCount   Int      @default(0) // Number of users who starred the template
+  skills      Skill[] // Implicit many-to-many relationship
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
 model Skill {
-  id        String     @id @default(uuid())
+  id        String     @id @default(cuid())
   name      String
-  tagValue  String
+  tagValue  String     @unique
   imageUrl  String?
-  templates Template[] @relation("TemplateSkills")
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+  templates Template[]
+}
+
+model GitRepo {
+  id              Int        @id @default(autoincrement())
+  name            String
+  description     String?
+  htmlUrl         String
+  topics          String[]
+  cloneUrl        String
+  language        String?
+  stargazersCount Int
+  owner           Owner      @relation(fields: [ownerId], references: [login])
+  ownerId         String
+  defaultBranch   String
+  updatedAt       DateTime   @updatedAt
+  size            Int
+  license         String?
+  forksCount      Int
+  Template        Template[]
+}
+
+model Owner {
+  id         Int       @id @default(autoincrement())
+  login      String    @unique
+  avatarUrl  String
+  profileUrl String
+  GitRepo    GitRepo[]
 }

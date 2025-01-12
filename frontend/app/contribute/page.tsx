@@ -35,18 +35,18 @@ import { DefaultGuidelines } from "@/constants/constant";
 import toast from "react-hot-toast";
 import { Template, useTemplateStore } from "@/provider/store/useTemplateStore";
 import { useRouter } from "next/navigation";
-import { createTemplate } from "@/actions/template";
+import TemplateAction from "@/actions/template";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
-  description: z.string().min(1, { message: "Description is required" }),
+  description: z.string().min(100, { message: "Description is required" }),
   guidelines: z.string().optional(),
 });
 
 const useCreateTemplateMutation = () => {
   return useMutation({
     mutationFn: async (template: Template) => {
-      const res = await createTemplate(template);
+      const res = await TemplateAction.createTemplate(template);
       return res;
     },
   });
@@ -200,6 +200,8 @@ const MultiPageForm = () => {
       success: "Template Created!",
       error: "Error Creating Template",
     });
+
+    router.push(`/templates`);
 
     clearTemplate();
   };
@@ -387,11 +389,7 @@ const MultiPageForm = () => {
                   <Button
                     type="button"
                     variant="secondary"
-                    disabled={
-                      form.getValues("name") === "" ||
-                      form.getValues("description") === "" ||
-                      tags?.length === 0
-                    }
+                    disabled={form.formState.isValid ? false : true}
                     onClick={() => setCurrentPage((prev) => prev + 1)}
                   >
                     Next

@@ -4,12 +4,13 @@ import React, { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { MagicCard } from "@/components/ui/magic-card";
 import { TiStarFullOutline, TiStarOutline } from "react-icons/ti";
-import { heroSkillsAvatarData, templateCardData } from "@/constants/constant";
 import { MdEdit } from "react-icons/md";
 
 import Image from "next/image";
 import { StarBg } from "@/public/assetsManager";
-import SkillsTagGroup from "../common/SkillsTagGroup";
+import SkillsTagGroup, { SkillTag } from "../common/SkillsTagGroup";
+import { SkillTagtype, TemplateCardDataType } from "@/types";
+import Link from "next/link";
 
 interface Author {
   name: string;
@@ -26,7 +27,6 @@ interface TemplateCardProps {
   author: Author;
   repoUrl: string;
   lastUpdated: string;
-  badges: string[];
   actions: {
     preview: string;
     star: boolean;
@@ -37,32 +37,20 @@ const TemplateCard = ({
   data,
   handleStarTemplate,
 }: {
-  data: TemplateCardProps;
-  handleStarTemplate: (id: string) => void;
+  data: TemplateCardDataType;
+  handleStarTemplate: (id: string) => void | undefined;
 }) => {
   return (
     <MagicCard
       className={cn(
-        " cursor-pointer flex-col w-[20rem] relative  p-6 bg-black text-white shadow-2xl rounded-lg  transition-transform duration-300  "
+        " cursor-pointer flex-col w-[20rem] h-[13rem]  relative  p-6 bg-black text-white shadow-2xl rounded-lg  transition-transform duration-300  "
       )}
     >
-      {/* Header */}
-      <div className="flex font-montserrat justify-between items-start w-[90%] ">
-        <div className=" flex flex-col gap-[.4rem] ">
-          <h3 className="text-[1.12rem]  text-white line-clamp-1 ">
-            {data.title}
-          </h3>
-          <p className="text-[.75rem]  text-white/60 line-clamp-2 ">
-            {data.description}
-          </p>
-        </div>
-      </div>
-
       {/* Upper star Button  */}
 
       <div
-        onClick={() => handleStarTemplate(data.id)}
-        className=" absolute top-[-1.4rem]  right-[-1.65rem]    "
+        onClick={() => handleStarTemplate(data.id as string)}
+        className=" absolute top-[-1.45rem] z-[10]  right-[-1.63rem]    "
       >
         <Image
           src={StarBg}
@@ -82,13 +70,26 @@ const TemplateCard = ({
         </div>
       </div>
 
+      {/* Header */}
+      <div className="flex font-montserrat z-[5] justify-between items-start min-w-[90%]  ">
+        <div className=" flex flex-col gap-[.4rem] min-w-full ">
+          <h3 className="text-[1.12rem]  text-white line-clamp-1 ">
+            {data.title}
+          </h3>
+          <p className="text-[.75rem]   text-white/60 line-clamp-2 ">
+            {data.description}
+          </p>
+        </div>
+      </div>
+
       {/* Footer */}
       <div className="flex flex-col gap-[1rem] mt-[.7rem]  ">
         {/* Author and Stars */}
         <div className="flex items-center gap-3 ">
           <Image
             src={
-              "https://plus.unsplash.com/premium_photo-1688350808212-4e6908a03925?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+              data.author.avatar ||
+              "https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=76&q=80"
             }
             alt="author"
             width={100}
@@ -97,10 +98,10 @@ const TemplateCard = ({
           />
           <div className=" flex flex-col justify-center ">
             <h2 className=" text-white/60 font-montserrat text-[.7rem] ">
-              {"Taylor Swift"}
+              {data.author.name}
             </h2>
             <p className=" text-white/50 font-montserrat text-[.6rem] mt-[-.1rem]  ">
-              @taycodes
+              {data.author.username}
             </p>
           </div>
 
@@ -113,19 +114,26 @@ const TemplateCard = ({
           <div className="flex items-center gap-[.1rem] ">
             <MdEdit className="text-[#575656] text-[.9rem] " />
             <span className=" text-white/60 font-montserrat text-[.7rem]  ">
-              {data.lastUpdated}
+              {new Date(data.lastUpdated).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              })}
             </span>
           </div>
         </div>
 
         <div className="flex items-center w-full justify-between gap-4">
           <div>
-            <SkillsTagGroup items={heroSkillsAvatarData} />
+            <SkillsTagGroup items={data.tags} />
           </div>
 
-          <button className=" border-[1px] border-[#404040] bg-[#171717] hover:bg-black transition-all duration-200 rounded-full px-[1rem] py-[.4rem] text-white/70 font-montserrat text-[.7rem] ">
+          <Link
+            href={`/templates/${data.id}`}
+            className=" border-[1px] border-[#404040] bg-[#171717] hover:bg-black transition-all duration-200 rounded-full px-[1rem] py-[.4rem] text-white/70 font-montserrat text-[.7rem] "
+          >
             View Kit
-          </button>
+          </Link>
         </div>
       </div>
     </MagicCard>
