@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 
 const getAllRepo = async (token: string) => {
   try {
+    console.log("get all repo called");
     if (!token) {
       return;
     }

@@ -12,6 +12,8 @@ import { LuPackageCheck } from "react-icons/lu";
 import { FaHandsHelping } from "react-icons/fa";
 
 import { FaCalendarDays } from "react-icons/fa6";
+import MarkdownPreview from "@uiw/react-markdown-preview";
+import rehypeSanitize from "rehype-sanitize";
 
 const UserPrivateProfilePage = ({ params }: { params: { id: string } }) => {
   const { id } = params;
@@ -33,7 +35,7 @@ const UserPrivateProfilePage = ({ params }: { params: { id: string } }) => {
         </div>
       ) : (
         <div className="flex flex-col my-[2rem]    w-full  relative ">
-          <div className=" flex gap-[1rem] w-full mt-[6rem] justify-center items-center relative z-[10] rounded-lg bg-[#171717] ">
+          <div className=" flex gap-[1rem] w-full mt-[3rem] justify-center items-center relative z-[10] rounded-lg bg-[#171717] ">
             {/* Banner Image */}
             <Image
               src={assets.BannerImage}
@@ -86,7 +88,7 @@ const UserPrivateProfilePage = ({ params }: { params: { id: string } }) => {
           </div>
 
           <div className=" flex gap-[2rem] justify-between w-full mt-[8rem]  ">
-            <div className=" flex flex-col gap-[.5rem] w-[20rem]  bg-neutral-900 p-[1.2rem] rounded-[.8rem]  ">
+            <div className=" flex flex-col gap-[.5rem] w-[20rem]  bg-[#262626] p-[1.2rem] rounded-[.8rem]  ">
               <h2 className=" font-openSans flex items-center gap-[.5rem] font-[500] text-[1.3rem] text-white/70">
                 <MdAlternateEmail />
                 {userData?.username}
@@ -116,7 +118,7 @@ const UserPrivateProfilePage = ({ params }: { params: { id: string } }) => {
 
             <div className=" flex w-[calc(100%-20rem)] gap-[2rem]  ">
               {/* Template Starred */}
-              <div className=" w-[15rem] flex justify-center gap-[1rem] flex-col relative bg-neutral-900 p-[1.5rem] rounded-[.8rem] h-full ">
+              <div className=" w-[15rem] flex justify-center gap-[1rem] flex-col relative bg-[#262626] p-[1.5rem] rounded-[.8rem] h-full ">
                 <div className=" font-openSans flex w-full justify-center  font-[400] mt-[-2rem] text-center  text-[6rem] text-white/70 text-[#FFCD05] ">
                   <h2 className=" leading-none text-[#FFCD05]  ">
                     {totalStarReceived || 0}
@@ -131,14 +133,14 @@ const UserPrivateProfilePage = ({ params }: { params: { id: string } }) => {
               </div>
 
               {/* Template Created */}
-              <div className=" w-[15rem] flex justify-center gap-[1rem] flex-col relative bg-neutral-900 p-[1.5rem] rounded-[.8rem] h-full ">
-                <div className=" font-openSans flex text-[#018cff] w-full justify-center  font-[400] mt-[-2rem] text-center  text-[6rem] text-white/70 ">
+              <div className=" w-[15rem] flex justify-center gap-[1rem] flex-col relative bg-[#262626] p-[1.5rem] rounded-[.8rem] h-full ">
+                <div className=" font-openSans flex text-[#018cff] w-full justify-center  font-[400] mt-[-2rem] text-center  text-[6rem] ">
                   <h2 className=" leading-none  ">
                     {userData?.createdTemplates?.length || 0}
                   </h2>
-                  <LuPackageCheck className="  text-[1.3rem] " />
+                  <LuPackageCheck className=" text-[#018cff]  text-[1.3rem] " />
                 </div>
-                <div className=" font-openSans absolute bottom-[1rem] flex items-center w-full right-0  text-center font-[400] text-[1rem] text-white/60 ">
+                <div className=" font-openSans absolute bottom-[1rem] flex items-center w-full right-0  text-center font-[400] text-[1rem]  ">
                   <p className=" text-center mx-auto text-[#018cff] ">
                     Total Template Created
                   </p>
@@ -146,10 +148,10 @@ const UserPrivateProfilePage = ({ params }: { params: { id: string } }) => {
               </div>
 
               {/* Error Solved */}
-              <div className=" w-[15rem] flex justify-center gap-[1rem] flex-col relative bg-neutral-900 p-[1.5rem] rounded-[.8rem] h-full ">
+              <div className=" w-[15rem] flex justify-center gap-[1rem] flex-col relative bg-[#262626] p-[1.5rem] rounded-[.8rem] h-full ">
                 <div className=" font-openSans flex text-green-500 w-full justify-center  font-[400] mt-[-2rem] text-center  text-[6rem] text-white/70 ">
-                  <h2 className=" leading-none  ">{0}</h2>
-                  <FaHandsHelping className="  text-[1.3rem] " />
+                  <h2 className=" leading-none text-green-500  ">{0}</h2>
+                  <FaHandsHelping className=" text-green-500  text-[1.3rem] " />
                 </div>
                 <div className=" font-openSans absolute bottom-[1rem] flex items-center w-full right-0  text-center font-[400] text-[1rem] text-white/60 ">
                   <p className=" text-center mx-auto text-green-500 ">
@@ -160,21 +162,80 @@ const UserPrivateProfilePage = ({ params }: { params: { id: string } }) => {
             </div>
           </div>
 
+          {/* Github Stats */}
+
+          <h3 className=" text-white/70 mt-[4rem] font-openSans  text-[1.5rem] ">
+            GitHub Stats
+          </h3>
+
+          <div className=" flex w-full gap-[2rem] mt-[2rem]  ">
+            <MarkdownPreview
+              source={`[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com?user=${id}&theme=apprentice&hide_border=true)]()`}
+              className="   rounded-[2rem] "
+              style={{
+                backgroundColor: "transparent",
+                borderRadius: "0rem",
+              }}
+              rehypePlugins={[rehypeSanitize]}
+            />
+
+            <MarkdownPreview
+              source={`![](http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=${id}&theme=apprentice)`}
+              className="   rounded-[2rem] "
+              style={{
+                backgroundColor: "#171717",
+                borderRadius: "2rem",
+              }}
+              rehypePlugins={[rehypeSanitize]}
+            />
+          </div>
+
+          <div className=" flex w-full gap-[2rem] mt-[2rem]  ">
+            <MarkdownPreview
+              source={`![](http://github-profile-summary-cards.vercel.app/api/cards/stats?username=${id}&theme=apprentice)`}
+              className="   rounded-[2rem] "
+              style={{
+                backgroundColor: "#171717",
+                borderRadius: "2rem",
+              }}
+              rehypePlugins={[rehypeSanitize]}
+            />
+
+            <MarkdownPreview
+              source={`![](http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=${id}&theme=apprentice)`}
+              className="   rounded-[2rem] "
+              style={{
+                backgroundColor: "#171717",
+                borderRadius: "2rem",
+              }}
+              rehypePlugins={[rehypeSanitize]}
+            />
+            <MarkdownPreview
+              source={`![](http://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=${id}&theme=apprentice&utcOffset=8)`}
+              className="   rounded-[2rem] "
+              style={{
+                backgroundColor: "#171717",
+                borderRadius: "2rem",
+              }}
+              rehypePlugins={[rehypeSanitize]}
+            />
+          </div>
+
+          <div className=" flex w-full gap-[2rem] mt-[2rem]  ">
+            <MarkdownPreview
+              source={`[![GitHub Streak](https://github-readme-activity-graph.vercel.app/graph?username=${id}&theme=apprentice&hide_border=true&area=true&bg_color=262626&color=bcbcbc&line=ffffaf&point=b07219)]()`}
+              className="rounded-[2rem] "
+              style={{
+                backgroundColor: "transparent",
+                borderRadius: "0rem",
+              }}
+              rehypePlugins={[rehypeSanitize]}
+            />
+          </div>
+
           {/* content start from here */}
         </div>
       )}
-
-      {/* <div>
-        <div className=" "> </div>
-        <MarkdownPreview
-          source={templateData?.guidelines || ""}
-          className=" bg- p-[2rem] mb-[2rem] rounded-lg "
-          style={{
-            backgroundColor: "#171717",
-          }}
-          rehypePlugins={[rehypeSanitize]}
-        />
-      </div> */}
     </div>
   );
 };

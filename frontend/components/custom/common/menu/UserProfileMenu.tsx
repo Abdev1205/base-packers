@@ -8,13 +8,20 @@ import {
 import { PiUserCircleGearFill } from "react-icons/pi";
 import { LuLogOut } from "react-icons/lu";
 import { useRouter } from "next/navigation";
-import { SignOutButton, useSession, useUser } from "@clerk/nextjs";
+import { SignOutButton, useClerk, useSession, useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { FaUserCircle } from "react-icons/fa";
 
 const UserProfileMenu = () => {
   const { user, isLoaded } = useUser();
   const router = useRouter();
+  const { signOut } = useClerk();
+
+  const handleSignOut = () => {
+    // so as soon as user sign out so we have to remove all the data from the local storage
+    signOut();
+    localStorage.clear();
+  };
   return (
     <div className="relative w-fit ">
       {/* Avatar Trigger */}
@@ -58,12 +65,13 @@ const UserProfileMenu = () => {
             View Profile
           </DropdownMenuItem>
           <DropdownMenuItem className="px-4 py-2 text-sm text-white/60 focus:bg-neutral-700 focus:text-white/60 cursor-pointer hover:bg-red-700">
-            <SignOutButton>
-              <div className="flex items-center gap-[.5rem] ">
-                <LuLogOut className=" text-[1rem] " />
-                Sign Out
-              </div>
-            </SignOutButton>
+            <div
+              onClick={() => handleSignOut()}
+              className="flex items-center gap-[.5rem] "
+            >
+              <LuLogOut className=" text-[1rem] " />
+              Sign Out
+            </div>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

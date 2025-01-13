@@ -109,7 +109,7 @@ const MultiPageForm = () => {
     }); // Adjust the timeout duration as needed
 
     return () => clearTimeout(timeoutId); // Cleanup the timeout on unmount
-  }, [template, form, user]);
+  }, []);
 
   const {
     refetch: fetchReadme,
