@@ -11,6 +11,7 @@ import LogoImage from "./assets/common/logo.png";
 import StarredCardImage from "./assets/common/starred-card.svg";
 import UnStarredCardImage from "./assets/common/unstarred-kit.svg";
 import StarBg from "./assets/common/star-bg.png";
+import BannerImage from "./assets/common/banner.png";
 
 // import HeroBg from "./assets/home/hero-bg.mp4"
 
@@ -27,6 +28,7 @@ const assets = {
   StarredCardImage,
   UnStarredCardImage,
   StarBg,
+  BannerImage,
 
   animation,
 };
