@@ -14,9 +14,11 @@ import { useSkillTagStore } from "@/provider/store/useSkillTagStore";
 import { SkillTagtype } from "@/types";
 import useSkillTags from "@/hooks/useSkillTags";
 import TechTagSelect from "../select/TechTagSelect";
+import useTemplate from "@/hooks/useTemplates";
 
 const TemplateFilter: React.FC = () => {
   const { skillTags } = useSkillTags();
+  const { refetchTemplate } = useTemplate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [sortValue, setSortValue] = useState("");
   const [query, setQuery] = useState("");
@@ -82,6 +84,7 @@ const TemplateFilter: React.FC = () => {
 
     router.push(`?${newParams.toString()}`);
     setDropdownOpen(false);
+    refetchTemplate();
   };
 
   const handleInputFocus = () => {
@@ -103,10 +106,10 @@ const TemplateFilter: React.FC = () => {
     const filter = searchParams.get("filter");
     const sort = searchParams.get("sort");
 
-    if (filter) {
+    if (filter && Array.isArray(skillTags)) {
       const filterTags = filter
         .split(",")
-        .map((name) => skillTags.find((tag) => tag.tagValue === name))
+        .map((name) => skillTags?.find((tag) => tag.tagValue === name))
         .filter(Boolean) as SkillTagtype[];
       setTags(filterTags);
     }

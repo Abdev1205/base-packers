@@ -5,7 +5,7 @@ import React, { forwardRef, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
 import Image from "next/image";
-import { LogoImage } from "@/public/assetsManager";
+import assets from "@/public/assetsManager";
 
 const Circle = forwardRef<
   HTMLDivElement,
@@ -76,7 +76,7 @@ export function CreateShare({ className }: { className?: string }) {
     {
       id: 7,
       name: "Bash packer",
-      image: LogoImage,
+      image: assets.LogoImage,
     },
     {
       id: 8,

@@ -1,6 +1,6 @@
 "use client";
 
-import { CreatingAccountLottie } from "@/public/assetsManager";
+import assets from "@/public/assetsManager";
 import Lottie from "lottie-react";
 
 const CreatingAccount = () => {
@@ -8,7 +8,7 @@ const CreatingAccount = () => {
     <div className="flex flex-col items-center justify-center mx-auto   ">
       <div className=" w-[28rem]    z-10 z-index-10 ">
         <Lottie
-          animationData={CreatingAccountLottie}
+          animationData={assets.animation.CreatingAccountLottie}
           autoplay={true}
           loop={true}
           className="z-10 z-index-10"

@@ -5,7 +5,7 @@ import { Template, useTemplateStore } from "@/provider/store/useTemplateStore";
 import { useEffect, useState } from "react";
 import MarkdownEditor from "@/components/custom/common/MdEditor/MarkdownEditor";
 import Image from "next/image";
-import { StarBg } from "@/public/assetsManager";
+
 import { TiStarFullOutline } from "react-icons/ti";
 import { useSession, useUser } from "@clerk/nextjs";
 import { MdCancel, MdEdit } from "react-icons/md";
@@ -18,6 +18,7 @@ import { SkillTagtype } from "@/types";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import rehypeSanitize from "rehype-sanitize";
 import { Button } from "@/components/ui/button";
+import assets from "@/public/assetsManager";
 
 const PreviewPage = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
@@ -45,7 +46,7 @@ const PreviewPage = ({ params }: { params: { id: string } }) => {
           className=" absolute top-[0rem]  right-[-.5rem]    "
         >
           <Image
-            src={StarBg}
+            src={assets.StarBg}
             alt="star"
             className=" w-[8rem] rounded-tr-[-1rem] select-none pointer-events-none mr-[-6rem]  absolute z-[5]  "
           />

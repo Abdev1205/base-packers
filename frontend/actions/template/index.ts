@@ -28,7 +28,12 @@ class TemplateAction {
 
   static async getTemplate() {
     try {
-      const res = await api.get(ENV.TEMPLATES_API_URL as string);
+      const url = window.location;
+      const query = url?.href?.split("?")[1];
+
+      const res = await api.get(
+        (ENV.TEMPLATES_API_URL + `?${query}`) as string
+      );
       return res.data.data;
     } catch (error) {
       return new Error("Failed to fetch templates");

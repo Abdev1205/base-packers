@@ -206,22 +206,12 @@ class TemplateController {
 
   static async getAllTemplates(req: Request, res: Response) {
     try {
-      const q = req.query;
+      const { q, filter, sort } = req.query;
 
-      // Default query setup
-      let query: any = {};
-
-      // Add default orderBy condition when no query parameters are provided
-      if (!q || Object.keys(q).length === 0) {
-        query = {
-          orderBy: {
-            createdAt: "desc",
-          },
-        };
-      }
-
-      const templates = await prisma.template.findMany({
-        ...query,
+      // Base Prisma query configuration
+      let query: any = {
+        where: {},
+        orderBy: {},
         include: {
           skills: true,
           repo: {
@@ -232,7 +222,55 @@ class TemplateController {
           createdBy: true,
           starredBy: true,
         },
-      });
+      };
+
+      // Add search condition (q)
+      if (q) {
+        query.where.OR = [
+          { name: { contains: q as string, mode: "insensitive" } },
+          { description: { contains: q as string, mode: "insensitive" } },
+          {
+            skills: {
+              some: {
+                tagValue: { contains: q as string, mode: "insensitive" },
+              },
+            },
+          },
+        ];
+      }
+
+      // Add filter condition (filter)
+      if (filter) {
+        const filterArray = (filter as string).split(",");
+        query.where.skills = {
+          some: {
+            tagValue: { in: filterArray }, // here also just macthes then also we have to return
+          },
+        };
+      }
+
+      // Add sort condition (sort)
+      if (sort === "popular") {
+        query.orderBy = {
+          starCount: "desc",
+        };
+      } else if (sort === "newest") {
+        query.orderBy = {
+          createdAt: "desc",
+        };
+      } else if (sort === "oldest") {
+        query.orderBy = {
+          createdAt: "asc",
+        };
+      } else {
+        // Default to newest if no sort option is provided
+        query.orderBy = {
+          createdAt: "desc",
+        };
+      }
+
+      // Fetch templates with Prisma
+      const templates = await prisma.template.findMany(query);
 
       res.status(200).json({
         success: true,

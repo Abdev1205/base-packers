@@ -95,7 +95,7 @@ const TechTagSelect: React.FC<TechTagSelectProps> = ({
               <X
                 className="cursor-pointer text-white/50"
                 size={14}
-                onClick={() => handleRemoveTag(tag.id)}
+                onClick={() => handleRemoveTag(tag.id as number)}
               />
             </Badge>
           ))}

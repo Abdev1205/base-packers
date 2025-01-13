@@ -6,7 +6,7 @@ const processTemplateData = ({
   userId,
 }: {
   data: TemplateApiRes[];
-  userId: string;
+  userId?: string;
 }) => {
   return (
     data &&

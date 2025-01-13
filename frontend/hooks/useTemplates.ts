@@ -13,7 +13,7 @@ const useTemplate = () => {
   const {
     data: templateData,
     isLoading: templateLoading,
-    refetch: refetchTemplate,
+    refetch: refetchTemp,
   } = useQuery({
     queryKey: ["template"],
     queryFn: TemplateAction.getTemplate,
@@ -24,12 +24,19 @@ const useTemplate = () => {
       TemplateAction.starTemplate(variables.id, variables.userId),
     onSuccess: (data) => {
       toast.success(data.message || "Template starred successfully");
-      refetchTemplate();
+      refetchTemp();
     },
     onError: (error) => {
       toast.error("Failed to star template");
     },
   });
+
+  const refetchTemplate = () => {
+    // we want that all the data should load then only we will refecth so using timeout
+    setTimeout(() => {
+      refetchTemp();
+    }, 1000);
+  };
 
   if (!isLoaded) {
     return {
@@ -37,6 +44,7 @@ const useTemplate = () => {
       templateLoading: true,
       templateCardData: [],
       handleStarTemplate: () => {},
+      refetchTemplate: () => {},
     };
   }
 
@@ -63,6 +71,7 @@ const useTemplate = () => {
     templateLoading,
     templateCardData,
     handleStarTemplate,
+    refetchTemplate,
   };
 };
 

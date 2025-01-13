@@ -7,10 +7,10 @@ import { TiStarFullOutline, TiStarOutline } from "react-icons/ti";
 import { MdEdit } from "react-icons/md";
 
 import Image from "next/image";
-import { StarBg } from "@/public/assetsManager";
 import SkillsTagGroup, { SkillTag } from "../common/SkillsTagGroup";
 import { SkillTagtype, TemplateCardDataType } from "@/types";
 import Link from "next/link";
+import assets from "@/public/assetsManager";
 
 interface Author {
   name: string;
@@ -53,7 +53,7 @@ const TemplateCard = ({
         className=" absolute top-[-1.45rem] z-[10]  right-[-1.63rem]    "
       >
         <Image
-          src={StarBg}
+          src={assets.StarBg}
           alt="star"
           className=" w-[4rem] rounded-tr-[1rem] select-none pointer-events-none  absolute z-[5]  "
         />
@@ -86,24 +86,29 @@ const TemplateCard = ({
       <div className="flex flex-col gap-[1rem] mt-[.7rem]  ">
         {/* Author and Stars */}
         <div className="flex items-center gap-3 ">
-          <Image
-            src={
-              data.author.avatar ||
-              "https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=76&q=80"
-            }
-            alt="author"
-            width={100}
-            height={100}
-            className=" size-[1.7rem] object-cover  rounded-full "
-          />
-          <div className=" flex flex-col justify-center ">
-            <h2 className=" text-white/60 font-montserrat text-[.7rem] ">
-              {data.author.name}
-            </h2>
-            <p className=" text-white/50 font-montserrat text-[.6rem] mt-[-.1rem]  ">
-              {data.author.username}
-            </p>
-          </div>
+          <Link
+            href={`/user/profile/${data?.author?.username}`}
+            className=" flex items-center gap-[.5rem] "
+          >
+            <Image
+              src={
+                data.author.avatar ||
+                "https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=76&q=80"
+              }
+              alt="author"
+              width={100}
+              height={100}
+              className=" size-[1.7rem] object-cover  rounded-full "
+            />
+            <div className=" flex flex-col justify-center ">
+              <h2 className=" text-white/60 font-montserrat text-[.7rem] ">
+                {data.author.name}
+              </h2>
+              <p className=" text-white/50 font-montserrat text-[.6rem] mt-[-.1rem]  ">
+                {data.author.username}
+              </p>
+            </div>
+          </Link>
 
           <div className="flex items-center gap-[.3rem] ">
             <TiStarFullOutline className="text-[#575656] text-[.9rem] " />
