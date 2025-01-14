@@ -31,7 +31,10 @@ export const useTemplateStore = create<TemplateStore>()(
         },
         updateTemplate: (partialTemplate) => {
           set((state) => ({
-            template: { ...state.template, ...partialTemplate },
+            template: {
+              ...state.template!,
+              ...partialTemplate,
+            },
           }));
         },
         clearTemplate: () => set({ template: null }),

@@ -7,7 +7,13 @@ import { data } from "framer-motion/client";
 import React from "react";
 import toast from "react-hot-toast";
 
-const useTemplate = () => {
+const useTemplate = ({
+  userId = null,
+  userName = null,
+}: {
+  userId?: string | null;
+  userName?: string | null;
+} = {}) => {
   const { user, isLoaded } = useUser();
 
   const {
@@ -17,6 +23,8 @@ const useTemplate = () => {
   } = useQuery({
     queryKey: ["template"],
     queryFn: TemplateAction.getTemplate,
+    refetchOnWindowFocus: false,
+    enabled: false,
   });
 
   const templateStarMutation = useMutation({
@@ -25,17 +33,35 @@ const useTemplate = () => {
     onSuccess: (data) => {
       toast.success(data.message || "Template starred successfully");
       refetchTemp();
+      refetchTempByUsername();
     },
     onError: (error) => {
       toast.error("Failed to star template");
     },
   });
 
+  const {
+    data: templateDataByUsername,
+    isLoading: isTemplateUserDataLoading,
+    refetch: refetchTempByUsername,
+  } = useQuery({
+    queryKey: ["templateByUsername"],
+    queryFn: async () => {
+      const data = await TemplateAction.getTemplateByUserId(userName as string);
+      return data;
+    },
+    refetchOnWindowFocus: false,
+    enabled: false,
+  });
+
   const refetchTemplate = () => {
     // we want that all the data should load then only we will refecth so using timeout
     setTimeout(() => {
       refetchTemp();
-    }, 1000);
+    }, 100);
+  };
+  const refetchTemplateByUsername = () => {
+    refetchTempByUsername();
   };
 
   if (!isLoaded) {
@@ -43,8 +69,10 @@ const useTemplate = () => {
       templateData: [],
       templateLoading: true,
       templateCardData: [],
+      templateCardDataByUsername: [],
       handleStarTemplate: () => {},
       refetchTemplate: () => {},
+      refetchTemplateByUsername,
     };
   }
 
@@ -52,6 +80,12 @@ const useTemplate = () => {
     data: templateData,
     userId: user?.id || "",
   });
+
+  const templateCardDataByUsername: TemplateCardDataType[] =
+    processTemplateData({
+      data: templateDataByUsername,
+      userId: user?.id || "",
+    });
 
   const handleStarTemplate = (id: string) => {
     if (!user?.id) {
@@ -70,8 +104,10 @@ const useTemplate = () => {
     templateData,
     templateLoading,
     templateCardData,
+    templateCardDataByUsername,
     handleStarTemplate,
     refetchTemplate,
+    refetchTemplateByUsername,
   };
 };
 

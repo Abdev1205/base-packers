@@ -1,5 +1,8 @@
+"use client";
+
 import Footer from "@/components/custom/common/footer/Footer";
 import Navbar from "@/components/custom/common/nav/Navbar";
+import dynamic from "next/dynamic";
 import { HeroHighlight } from "@/components/ui/hero-highlight";
 import React from "react";
 

@@ -31,9 +31,12 @@ class TemplateAction {
       const url = window.location;
       const query = url?.href?.split("?")[1];
 
-      const res = await api.get(
-        (ENV.TEMPLATES_API_URL + `?${query}`) as string
-      );
+      let qUrl = "";
+      if (query) {
+        qUrl = `?${query}`;
+      }
+
+      const res = await api.get((ENV.TEMPLATES_API_URL + `${qUrl}`) as string);
       return res.data.data;
     } catch (error) {
       return new Error("Failed to fetch templates");
@@ -43,6 +46,17 @@ class TemplateAction {
   static async getTemplateById(id: string) {
     try {
       const res = await api.get(`${ENV.TEMPLATES_API_URL as string}/${id}`);
+      return res.data.data;
+    } catch (error) {
+      return new Error("Failed to fetch template");
+    }
+  }
+
+  static async getTemplateByUserId(id: string) {
+    try {
+      const res = await api.get(
+        `${ENV.TEMPLATES_API_URL as string}/user/${id}`
+      );
       return res.data.data;
     } catch (error) {
       return new Error("Failed to fetch template");

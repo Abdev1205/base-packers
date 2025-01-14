@@ -1,10 +1,9 @@
 import { cn } from "@/lib/utils";
 import assets from "@/public/assetsManager";
+import React from "react";
 import dynamic from "next/dynamic";
 const DynamicLottie = dynamic(() => import("lottie-react"), { ssr: false });
-import React from "react";
-
-const NoResultAnimation = ({
+const NotFoundAnimation = ({
   className,
   containerClassName,
 }: {
@@ -20,7 +19,7 @@ const NoResultAnimation = ({
     >
       <div className={cn(" w-[35rem]   z-10 z-index-10 ", className)}>
         <DynamicLottie
-          animationData={assets.animation.NoResultLottie}
+          animationData={assets.animation.NotFoundLottie}
           autoplay={true}
           loop={true}
           className="z-10 z-index-10"
@@ -36,4 +35,4 @@ const NoResultAnimation = ({
   );
 };
 
-export default NoResultAnimation;
+export default NotFoundAnimation;

@@ -59,7 +59,7 @@ const UserProfileMenu = () => {
           {/* Menu Items */}
           <DropdownMenuItem
             className="px-4 py-2 text-sm text-white/60 cursor-pointer focus:bg-neutral-700 focus:text-white/60 hover:bg-neutral-700/60"
-            onClick={() => router.push(`user/profile/${user?.username}`)}
+            onClick={() => router.push(`/user/${user?.username}`)}
           >
             <PiUserCircleGearFill className="text-[1rem] " />
             View Profile

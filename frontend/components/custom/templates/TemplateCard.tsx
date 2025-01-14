@@ -87,7 +87,7 @@ const TemplateCard = ({
         {/* Author and Stars */}
         <div className="flex items-center gap-3 ">
           <Link
-            href={`/user/profile/${data?.author?.username}`}
+            href={`/user/${data?.author?.username}`}
             className=" flex items-center gap-[.5rem] "
           >
             <Image

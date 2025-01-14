@@ -1,4 +1,5 @@
 import UserAction from "@/actions/user";
+import { UserDataApiRes } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 
 const useUserData = (userId: string) => {
@@ -8,12 +9,14 @@ const useUserData = (userId: string) => {
     isFetching: isUserFetching,
     refetch: refetchUser,
   } = useQuery({
-    queryKey: ["User", "userById"],
+    queryKey: ["userById"],
     queryFn: async () => {
-      return UserAction.getUserById(userId);
+      const userData = await UserAction.getUserById(userId);
+      return userData as UserDataApiRes;
     },
     staleTime: 0,
     refetchOnWindowFocus: false,
+    enabled: false,
   });
 
   return {

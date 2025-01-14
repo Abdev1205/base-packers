@@ -32,22 +32,17 @@ const TemplateDetailPage = ({ params }: { params: { id: string } }) => {
     refetch: refetchTemplate,
     isFetching: isTemplateFetching,
   } = useQuery({
-    queryKey: ["Template", "templateById"],
+    queryKey: ["templateById"],
     queryFn: async () => {
       const res = (await TemplateAction.getTemplateById(
         id
       )) as unknown as TemplateApiRes;
-      // object to array
 
-      console.log("res", res);
       const resArray = [res];
-      console.log("resArray", resArray);
       const processData = processTemplateData({
         data: resArray,
         userId: user?.id as string,
       });
-
-      console.log("processData", processData);
 
       return processData[0] as TemplateCardDataType;
     },

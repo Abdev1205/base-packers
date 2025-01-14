@@ -93,3 +93,36 @@ export type TemplateCardDataType = {
     star: boolean;
   };
 };
+
+export interface UserDataApiRes {
+  id: string;
+  name: string;
+  email: string;
+  username: string;
+  avatar: string;
+  createdAt: Date;
+  updatedAt: Date;
+  description?: string;
+  starredTemplates: {
+    id: string;
+    name: string;
+    description: string;
+    guidelines: string;
+    repoId: number;
+    createdById: string;
+    starCount: number;
+    createdAt: string;
+    updatedAt: string;
+  }[];
+  createdTemplates: {
+    id: string;
+    name: string;
+    description: string;
+    guidelines: string;
+    repoId: number;
+    createdById: string;
+    starCount: number;
+    createdAt: string;
+    updatedAt: string;
+  }[];
+}

@@ -8,6 +8,7 @@ import TemplateCard from "@/components/custom/templates/TemplateCard";
 import { templateCardData } from "@/constants/constant";
 import useTemplate from "@/hooks/useTemplates";
 import { useUser } from "@clerk/nextjs";
+import dynamic from "next/dynamic";
 import React, { Suspense, useEffect, useState } from "react";
 
 const TemplatePage = () => {
@@ -16,7 +17,12 @@ const TemplatePage = () => {
     templateLoading,
     templateCardData,
     handleStarTemplate,
+    refetchTemplate,
   } = useTemplate();
+
+  useEffect(() => {
+    refetchTemplate();
+  }, [templateData]);
 
   return (
     <>
