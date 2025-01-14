@@ -1,20 +1,28 @@
 "use client";
 
+import { SkillTagtype } from "@/types";
 import Image from "next/image";
 import React from "react";
 
-interface SkillsTagGroupProps {
-  items: {
-    id: number;
-    name: string;
-    image: string;
-  }[];
-  maxVisible?: number; // Maximum number of avatars to show before the +X tag
+export interface SkillTag {
+  id: string | number;
+  name: string;
+  imageUrl: string;
+  createdAt?: string;
+  updatedAt?: string;
+  tagValue?: string;
+}
+
+export interface SkillsTagGroupProps {
+  items: SkillTagtype[];
+  maxVisible?: number;
+  preview?: boolean;
 }
 
 const SkillsTagGroup: React.FC<SkillsTagGroupProps> = ({
   items,
   maxVisible = 4,
+  preview = false,
 }) => {
   // Determine the visible items and the count of remaining items
   const visibleItems = items.slice(0, maxVisible);
@@ -29,49 +37,29 @@ const SkillsTagGroup: React.FC<SkillsTagGroupProps> = ({
           // onMouseEnter={() => setHoveredIndex(item.id)}
           // onMouseLeave={() => setHoveredIndex(null)}
         >
-          {/* <AnimatePresence mode="popLayout">
-          {hoveredIndex === item.id && (
-            <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.6 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                transition: {
-                  type: "spring",
-                  stiffness: 260,
-                  damping: 10,
-                },
-              }}
-              exit={{ opacity: 0, y: 20, scale: 0.6 }}
-              style={{
-                translateX: translateX,
-                rotate: rotate,
-                whiteSpace: "nowrap",
-              }}
-              className="absolute -top-16 -left-1/2 translate-x-1/2 flex text-xs  flex-col items-center justify-center rounded-md bg-black  z-50 shadow-xl px-4 py-2"
-            >
-              <div className="absolute inset-x-10 z-30 w-[20%] -bottom-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent h-px" />
-              <div className="absolute left-10 w-[40%] z-30 -bottom-px bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px" />
-              <div className="font-bold text-white relative z-30 text-base">
-                {item.name}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence> */}
           <Image
             // onMouseMove={handleMouseMove}
             height={100}
             width={100}
-            src={item.image}
+            src={item.imageUrl}
             alt={item.name}
-            className="object-cover !m-0 !p-0 object-top rounded-full h-[2rem] w-[2rem] border-[1px]  group-hover:z-30 border-[#3C3A3A] shadow-[0px_-1px_0px_0px_#FFFFFF40_inset,_0px_1px_0px_0px_#FFFFFF40_inset] relative transition duration-500  "
+            className={`  rounded-full  border-[1px]  group-hover:z-30 border-[#3C3A3A] shadow-[0px_-1px_0px_0px_#FFFFFF40_inset,_0px_1px_0px_0px_#FFFFFF40_inset] relative transition duration-500 bg-neutral-800 ${
+              preview
+                ? "w-[2.3rem] h-[2.3rem] object-scale-down "
+                : "w-[2rem] h-[2rem] object-cover"
+            }   `}
           />
         </div>
       ))}
 
       {remainingCount > 0 && (
-        <div className="flex items-center justify-center size-[2rem] border border-[#3C3A3A] rounded-full bg-[#222] text-white/60 text-[.68rem] ">
+        <div
+          className={`flex items-center justify-center  border border-[#3C3A3A] rounded-full bg-[#222] text-white/60  ${
+            preview
+              ? "w-[2.3rem] h-[2.3rem] text-[.8rem] "
+              : "w-[2rem] h-[2rem] text-[.68rem] "
+          }  `}
+        >
           +{remainingCount}
         </div>
       )}

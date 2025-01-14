@@ -406,32 +406,123 @@ export const heroSkillsAvatarData = [
   {
     id: 1,
     name: "React Js",
-    image: "https://i.postimg.cc/TY9H1Zbs/image.png",
+    imageUrl: "https://i.postimg.cc/TY9H1Zbs/image.png",
   },
   {
     id: 2,
     name: "Node JS",
-    image: "https://i.postimg.cc/KctWSK8x/nodejs-inner.webp",
+    imageUrl: "https://i.postimg.cc/KctWSK8x/nodejs-inner.webp",
   },
   {
     id: 3,
     name: "MongoDB",
-    image:
+    imageUrl:
       "https://i.postimg.cc/tRKGjQbG/d6e4b7bd3a0ae010ed3107618ee5128f5c6d919f-400x400.png",
   },
   {
     id: 4,
     name: "Next JS",
-    image: "https://i.postimg.cc/W3qYWzhF/image.jpg",
+    imageUrl: "https://i.postimg.cc/W3qYWzhF/image.jpg",
   },
   {
     id: 5,
     name: "PostgreSQL",
-    image: "https://i.postimg.cc/SQ73wXgC/postgress-logo.webp",
+    imageUrl: "https://i.postimg.cc/SQ73wXgC/postgress-logo.webp",
   },
   {
     id: 6,
     name: "Tailwind CSS",
-    image: "https://i.postimg.cc/rpwSgwf1/plus-tailwind.jpg",
+    imageUrl: "https://i.postimg.cc/rpwSgwf1/plus-tailwind.jpg",
   },
 ];
+
+export const DefaultGuidelines = `
+## Template Overview
+Welcome to the [Template Name] template! This template is designed to help you [brief purpose, e.g., "quickly set up a blog using React.js and Tailwind CSS"]. Below, you'll find everything you need to get started.
+
+---
+
+## Key Features
+- **Feature 1**: [Brief description, e.g., "Responsive design for all devices."]
+- **Feature 2**: [Brief description, e.g., "Preconfigured with ESLint and Prettier for consistent code style."]
+- **Feature 3**: [Brief description, e.g., "Includes reusable components for forms, modals, and navigation."]
+
+---
+
+## Getting Started
+### Prerequisites
+Ensure you have the following installed on your system:
+- Node.js (version 14 or higher)
+- npm or yarn
+- Git
+
+### Installation
+1. Clone the repository:
+   \`\`\`bash
+   git clone <repository-url>
+   \`\`\`
+2. Navigate to the template directory:
+   \`\`\`bash
+   cd <template-name>
+   \`\`\`
+3. Install dependencies:
+   \`\`\`bash
+   npm install
+   \`\`\`
+4. Start the development server:
+   \`\`\`bash
+   npm start
+   \`\`\`
+
+---
+
+## Usage Instructions
+1. Update the configuration file:
+   - Open \`config.js\` and update [specific settings, e.g., API keys, environment variables].
+2. Customize styles:
+   - Modify styles in the \`/styles\` directory as needed.
+3. Add your content:
+   - Update components or pages in the \`/src\` folder to suit your needs.
+
+---
+
+## Folder Structure
+\`\`\`
+📁 src
+   ├── 📁 components       # Prebuilt components
+   ├── 📁 pages            # Default pages included
+   ├── 📁 assets           # Images, fonts, and other assets
+   ├── 📁 styles           # Global and component-specific styles
+   └── 📄 index.js         # Entry point
+\`\`\`
+
+---
+
+## Customization
+Feel free to customize this template to fit your requirements:
+- Add new pages or components to \`/src/pages\` or \`/src/components\`.
+- Replace default assets in the \`/src/assets\` folder.
+- Adjust global styles in \`/src/styles/global.css\`.
+
+---
+
+## FAQs
+**Q: How do I deploy this template?**  
+A: Build the project and deploy the \`/build\` folder to your hosting provider:
+   \`\`\`bash
+   npm run build
+   \`\`\`
+
+**Q: Can I use this template commercially?**  
+A: Please refer to the [LICENSE](#) section for usage terms.
+
+---
+
+## Support
+If you encounter issues or have questions, feel free to open an issue in the repository or contact the template creator.
+
+---
+
+## License
+This template is licensed under [License Name]. Refer to the LICENSE file for details.
+`;

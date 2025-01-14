@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { HeartIcon } from "lucide-react";
-import { LogoImage } from "@/public/assetsManager";
 import { FaLinkedin, FaGithub, FaGlobe } from "react-icons/fa";
 import { MdMail } from "react-icons/md";
 import Link from "next/link";
 import { FaHeart } from "react-icons/fa6";
+import assets from "@/public/assetsManager";
 
 export default function Footer() {
   const SocialMediaData = [
@@ -37,7 +37,7 @@ export default function Footer() {
         {/* Left Section - Logo and Tagline */}
         <div className="flex flex-col gap-[.5rem] w-[30rem]  ">
           <div className="  flex items-center gap-[.5rem] ">
-            <Image src={LogoImage} alt="logo" className=" w-[2.5rem] " />
+            <Image src={assets.LogoImage} alt="logo" className=" w-[2.5rem] " />
             <h2 className=" text-white/80 font-poppins font-[400] text-[1.4rem] ">
               Base Packers
             </h2>

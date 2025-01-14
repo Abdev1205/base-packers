@@ -4,10 +4,12 @@ import React, { useEffect, useState } from "react";
 import { IoSearch, IoClose } from "react-icons/io5";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import debounce from "lodash.debounce";
+import useTemplate from "@/hooks/useTemplates";
 
 const SearchBar = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const { refetchTemplate } = useTemplate();
   const searchParams = useSearchParams(); // To fetch query parameters
   const [searchText, setSearchText] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
@@ -33,6 +35,7 @@ const SearchBar = () => {
     }
 
     router.push(`?${newParams.toString()}`);
+    refetchTemplate();
   }, 300);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
