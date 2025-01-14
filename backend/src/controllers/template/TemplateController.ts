@@ -323,6 +323,41 @@ class TemplateController {
       });
     }
   }
+
+  static async getTemplatesByUserId(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const templates = await prisma.template.findMany({
+        where: {
+          createdBy: {
+            username: id,
+          },
+        },
+        include: {
+          skills: true,
+          repo: {
+            include: {
+              owner: true,
+            },
+          },
+          createdBy: true,
+          starredBy: true,
+        },
+      });
+
+      res.status(200).json({
+        success: true,
+        data: templates,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch templates",
+        error: error.message,
+      });
+    }
+  }
 }
 
 export default TemplateController;

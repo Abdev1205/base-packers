@@ -17,11 +17,8 @@ class UserController {
           username: id, // Assuming "id" corresponds to the "username" field
         },
         include: {
-          starredTemplates: {
-            include: {
-              repo: true, // Adjusted to "repo" as per your model field
-            },
-          },
+          starredTemplates: true, // Includes starred templates
+
           createdTemplates: true, // Includes created templates
         },
       });
