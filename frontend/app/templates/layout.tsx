@@ -1,5 +1,8 @@
+"use client";
+
 import Footer from "@/components/custom/common/footer/Footer";
 import Navbar from "@/components/custom/common/nav/Navbar";
+import dynamic from "next/dynamic";
 import { HeroHighlight } from "@/components/ui/hero-highlight";
 import React from "react";
 
@@ -8,11 +11,11 @@ const TemplateLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="w-full bg-black ">
       <Navbar primary={false} />
       <HeroHighlight
-        containerClassName="  bg-black h-full  w-full  top-0 left-0 z-[10] "
+        containerClassName="  bg-black  h-full   w-full  top-0 left-0 z-[10] "
         mouseAnimation={false}
-        className=" w-full "
+        className=" w-full  "
       >
-        <div className=" w-full  mt-[4rem] overflow-y-auto ">{children}</div>
+        <div className=" w-full   mt-[4rem] overflow-y-auto ">{children}</div>
         <Footer />
       </HeroHighlight>
     </div>

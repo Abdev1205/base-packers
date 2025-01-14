@@ -5,6 +5,8 @@ import React, { useEffect } from "react";
 
 const useSkillTags = () => {
   const { skillTags, setSkillTags } = useSkillTagStore();
+
+  // Fetch skill tags with React Query
   const {
     data: skillTagsData,
     isLoading,
@@ -13,12 +15,15 @@ const useSkillTags = () => {
   } = useQuery({
     queryKey: ["skillTags"],
     queryFn: getAllSkillTags,
-    enabled: skillTags.length === 0,
+    initialData: skillTags?.length > 0 ? skillTags : undefined, // Prefill with Zustand data
+    enabled: skillTags.length === 0, // Fetch only if Zustand store is empty
+    staleTime: 1000 * 60 * 15, // Data is fresh for 15 minutes
   });
 
+  // Synchronize fetched data to Zustand store
   useEffect(() => {
     if (skillTagsData?.data) {
-      setSkillTags(skillTagsData?.data);
+      setSkillTags(skillTagsData.data);
     }
   }, [skillTagsData, setSkillTags]);
 

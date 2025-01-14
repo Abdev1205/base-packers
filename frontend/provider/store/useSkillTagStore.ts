@@ -25,8 +25,13 @@ export const useSkillTagStore = create<SkillTagStore>()(
   devtools(
     persist(
       (set, get) => ({
-        skillTags: [],
-        setSkillTags: (tags: SkillTag[]) => set({ skillTags: tags }),
+        skillTags:
+          typeof window !== "undefined"
+            ? JSON.parse(localStorage.getItem("skillTagStore") || "[]")
+            : [], // Handle SSR
+        setSkillTags: (tags: SkillTag[]) => {
+          set({ skillTags: tags });
+        },
         getAllSkillTags: () => get().skillTags,
       }),
       {

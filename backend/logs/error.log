@@ -1,0 +1,11 @@
+2025-01-07 18:34:52:3452 [31merror[39m: [31mRequest failed with status code 401[39m
+2025-01-07 18:34:52:3452 [31merror[39m: [31mRequest failed with status code 401[39m
+2025-01-07 18:36:45:3645 [31merror[39m: [31mRequest failed with status code 401[39m
+2025-01-08 00:24:01:241 [31merror[39m: [31mRequest failed with status code 404[39m
+2025-01-08 00:24:08:248 [31merror[39m: [31mRequest failed with status code 404[39m
+2025-01-08 00:24:40:2440 [31merror[39m: [31mRequest failed with status code 404[39m
+2025-01-08 11:30:21:3021 [31merror[39m: [31mRequest failed with status code 404[39m
+2025-01-08 11:31:48:3148 [31merror[39m: [31mRequest failed with status code 404[39m
+2025-01-08 11:34:39:3439 [31merror[39m: [31mRequest failed with status code 404[39m
+2025-01-08 23:20:57:2057 [31merror[39m: [31mgetaddrinfo ENOTFOUND api.github.com[39m
+2025-01-13 22:16:08:168 [31merror[39m: [31mRequest failed with status code 404[39m
