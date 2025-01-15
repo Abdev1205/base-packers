@@ -18,7 +18,8 @@ const getAllRepo = async (token: string) => {
     });
     return res.data;
   } catch (error) {
-    return new Error("Failed to fetch repo");
+    toast.error("Failed to fetch repo");
+    return null;
   }
 };
 
@@ -40,7 +41,7 @@ const getReadme = async (token: string, repoName: string, owner: string) => {
     return res.data;
   } catch (error) {
     toast.error("Readme is not available for this repo");
-    return new Error("Failed to fetch readme");
+    return null;
   }
 };
 
