@@ -60,7 +60,7 @@ class TemplateAction {
       const res = await api.get(
         `${ENV.TEMPLATES_API_URL as string}/user/${id}`
       );
-      return res.data.data;
+      return res.data;
     } catch (error) {
       toast.error("Failed to fetch template");
       return null;

@@ -19,26 +19,13 @@ const UserProfilePage = ({ params }: { params: { id: string } }) => {
   const { userData, isUserFetching, isUserLoading, refetchUser } =
     useUserData(id);
 
-  const { templateCardDataByUsername, refetchTemplateByUsername } = useTemplate(
-    {
-      userName: id,
-    }
-  );
-
-  const starredTemplates = useMemo(() => {
-    return (
-      templateCardDataByUsername?.filter((template) => template.actions.star) ||
-      []
-    );
-  }, [templateCardDataByUsername]);
-
-  const createdTemplates = useMemo(() => {
-    return (
-      templateCardDataByUsername?.filter(
-        (template) => template.author.username
-      ) || []
-    );
-  }, [templateCardDataByUsername]);
+  const {
+    templateCreatedByUsername,
+    templateStarredByUsername,
+    refetchTemplateByUsername,
+  } = useTemplate({
+    userName: id,
+  });
 
   const totalStarReceived = useMemo(() => {
     return (
@@ -102,12 +89,18 @@ const UserProfilePage = ({ params }: { params: { id: string } }) => {
             {/* Starred Templates  */}
             <TabsContent value="starred">
               {/* <UserStarredTempalateTab userName={id} /> */}
-              <UserStarredTempalateTab userName={id} data={starredTemplates} />
+              <UserStarredTempalateTab
+                userName={id}
+                data={templateStarredByUsername || []}
+              />
             </TabsContent>
 
             {/* Created Templates */}
             <TabsContent value="created">
-              <UserCreatedTemplateTab userName={id} data={createdTemplates} />
+              <UserCreatedTemplateTab
+                userName={id}
+                data={templateCreatedByUsername || []}
+              />
             </TabsContent>
           </Tabs>
         </div>
