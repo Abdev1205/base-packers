@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { montserrat, openSans, poppins } from "@/public/font";
 import "./globals.css";
 import ConfigProviders from "@/provider/ConfigProvider";
+import ENV from "@/config/ENV";
 
 export const metadata: Metadata = {
   title: "Base Packer",
@@ -19,6 +21,9 @@ export default function RootLayout({
         className={`${montserrat.variable} ${openSans.variable} ${poppins.variable}`}
       >
         <ConfigProviders>{children}</ConfigProviders>
+        {ENV.GOOGLE_ANALYTICS_ID && (
+          <GoogleAnalytics gaId={ENV.GOOGLE_ANALYTICS_ID} />
+        )}
       </body>
     </html>
   );
