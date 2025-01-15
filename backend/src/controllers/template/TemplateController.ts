@@ -327,7 +327,7 @@ class TemplateController {
   static async getTemplatesByUserId(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const templates = await prisma.template.findMany({
+      const templatesCreated = await prisma.template.findMany({
         where: {
           createdBy: {
             username: id,
@@ -345,9 +345,30 @@ class TemplateController {
         },
       });
 
+      const templateStarred = await prisma.template.findMany({
+        where: {
+          starredBy: {
+            some: {
+              username: id,
+            },
+          },
+        },
+        include: {
+          skills: true,
+          repo: {
+            include: {
+              owner: true,
+            },
+          },
+          createdBy: true,
+          starredBy: true,
+        },
+      });
+
       res.status(200).json({
         success: true,
-        data: templates,
+        templatesCreated,
+        templateStarred,
       });
     } catch (error) {
       console.error(error);
