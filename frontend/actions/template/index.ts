@@ -9,7 +9,8 @@ class TemplateAction {
       const res = await api.post(ENV.TEMPLATES_API_URL as string, data);
       return res.data;
     } catch (error) {
-      return new Error("Failed to create template");
+      toast.error("Failed to create template");
+      return null;
     }
   }
 
@@ -22,7 +23,7 @@ class TemplateAction {
       return res.data;
     } catch (error) {
       toast.error("Failed to star template");
-      return new Error("Failed to star template");
+      return null;
     }
   }
 
@@ -39,7 +40,8 @@ class TemplateAction {
       const res = await api.get((ENV.TEMPLATES_API_URL + `${qUrl}`) as string);
       return res.data.data;
     } catch (error) {
-      return new Error("Failed to fetch templates");
+      toast.error("Failed to fetch templates");
+      return null;
     }
   }
 
@@ -48,7 +50,8 @@ class TemplateAction {
       const res = await api.get(`${ENV.TEMPLATES_API_URL as string}/${id}`);
       return res.data.data;
     } catch (error) {
-      return new Error("Failed to fetch template");
+      toast.error("Failed to fetch template");
+      return null;
     }
   }
 
@@ -57,9 +60,10 @@ class TemplateAction {
       const res = await api.get(
         `${ENV.TEMPLATES_API_URL as string}/user/${id}`
       );
-      return res.data.data;
+      return res.data;
     } catch (error) {
-      return new Error("Failed to fetch template");
+      toast.error("Failed to fetch template");
+      return null;
     }
   }
 }
