@@ -1,5 +1,6 @@
 import Navbar from "@/components/custom/common/nav/Navbar";
 import { HeroHighlight } from "@/components/ui/hero-highlight";
+import { clerkClient, User } from "@clerk/nextjs/server";
 import React from "react";
 
 const ContributeLayout = ({ children }: { children: React.ReactNode }) => {
