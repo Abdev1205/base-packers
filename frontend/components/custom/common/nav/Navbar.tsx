@@ -8,6 +8,7 @@ import { SignedIn, UserButton, useSession, useSignIn } from "@clerk/nextjs";
 import { div } from "framer-motion/client";
 import assets from "@/public/assetsManager";
 import UserProfileMenu from "../menu/UserProfileMenu";
+import Link from "next/link";
 
 const Navbar = ({ primary = true }: { primary?: boolean }) => {
   const { signIn, isLoaded } = useSignIn();
@@ -53,12 +54,12 @@ const Navbar = ({ primary = true }: { primary?: boolean }) => {
         primary ? " " : " border-b border-white/10 "
       }  `}
     >
-      <div className="  flex items-center gap-[.5rem] ">
+      <Link href="/" className="  flex items-center gap-[.5rem] ">
         <Image src={assets.LogoImage} alt="logo" className=" w-[2.5rem] " />
         <h2 className=" text-white/80 font-poppins font-[400] text-[1.4rem] ">
           Base Packers
         </h2>
-      </div>
+      </Link>
 
       <div className=" flex items-center  ">
         <SingleLink label="Home" path="/" />

@@ -36,12 +36,12 @@ export default function Footer() {
       <div className="flex justify-between items-center">
         {/* Left Section - Logo and Tagline */}
         <div className="flex flex-col gap-[.5rem] w-[30rem]  ">
-          <div className="  flex items-center gap-[.5rem] ">
+          <Link href="/" className="  flex items-center gap-[.5rem] ">
             <Image src={assets.LogoImage} alt="logo" className=" w-[2.5rem] " />
             <h2 className=" text-white/80 font-poppins font-[400] text-[1.4rem] ">
               Base Packers
             </h2>
-          </div>
+          </Link>
           <p className="text-sm text-white/50 text-center md:text-left">
             A community-driven platform to explore, share, and discover starter
             packages and templates tailored for various tech stacks. Empowering

@@ -36,6 +36,7 @@ import toast from "react-hot-toast";
 import { Template, useTemplateStore } from "@/provider/store/useTemplateStore";
 import { useRouter } from "next/navigation";
 import TemplateAction from "@/actions/template";
+import NotLoggedIn from "@/components/custom/common/NotLoggedIn";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -53,7 +54,7 @@ const useCreateTemplateMutation = () => {
 };
 
 const MultiPageForm = () => {
-  const { user, isLoaded } = useUser();
+  const { user, isLoaded, isSignedIn } = useUser();
   const createTemplateMutation = useCreateTemplateMutation();
   const router = useRouter();
   const { template, setTemplate, updateTemplate, clearTemplate } =
@@ -205,6 +206,14 @@ const MultiPageForm = () => {
 
     clearTemplate();
   };
+
+  if (!isLoaded) {
+    return null;
+  }
+
+  if (isLoaded && !isSignedIn) {
+    return <NotLoggedIn />;
+  }
 
   return (
     <div className="flex relative flex-col w-full font-openSans items-center justify-center">

@@ -56,7 +56,7 @@ const UserProfileHero = ({
 
         {isLoaded && user?.username === userData?.username ? (
           <Link
-            href={`/user/profile/${id}/edit`}
+            href={`/user/${id}/profile`}
             className=" flex items-center mt-[2rem]  text-white/50 gap-[.3rem] hover:text-white transition duration-200"
           >
             <MdModeEdit />
