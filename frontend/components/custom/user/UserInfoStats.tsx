@@ -36,7 +36,7 @@ const UserInfoStats = ({
             <h2>{userData?.name}</h2>
           </div>
           <h3 className=" font-openSans line-clamp-2 mt-[.5rem] font-[400] text-[.9rem] text-white/50 ">
-            {userData?.description ||
+            {userData?.about ||
               "Passionate Web Developer who wants to explore every Tech Fields I'm Abhay Mishra I am a Mern-Stack Web developer from Korba Chhattisgarh India."}
           </h3>
         </div>

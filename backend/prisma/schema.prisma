@@ -13,6 +13,7 @@ model User {
   name             String
   email            String?    @unique
   username         String?    @unique
+  about            String?    @default("Hi there! 👋 I'm a GitHub enthusiast who loves exploring new projects and collaborating with developers around the globe. Always curious and eager to contribute, I enjoy learning and sharing knowledge within the tech community. Let’s build something amazing together!")
   avatar           String?
   starredTemplates Template[] @relation("StarredBy")
   createdTemplates Template[] @relation("CreatedBy")
