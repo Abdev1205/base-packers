@@ -69,7 +69,7 @@ const TabbedCarousel = () => {
         setActiveIndex((prevIndex) => (prevIndex + 1) % content.length);
         setProgress(0);
       }
-    }, 50);
+    }, 110);
 
     return () => clearInterval(interval);
   }, [progress, isInView, content.length]);

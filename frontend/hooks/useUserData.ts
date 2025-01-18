@@ -19,11 +19,34 @@ const useUserData = (userId: string) => {
     enabled: false,
   });
 
+  const {
+    data: userProfileData,
+    isLoading: isUserProfileLoading,
+    isRefetching: isUserProfileFetching,
+    refetch: refetchUserProfile,
+  } = useQuery({
+    queryKey: ["userProfile"],
+    queryFn: async () => {
+      const userData = await UserAction.getUserProfile(userId);
+      return userData as Omit<
+        UserDataApiRes,
+        "createdTemplates" | "starredTemplates"
+      >;
+    },
+    staleTime: 0,
+    refetchOnWindowFocus: false,
+    enabled: false,
+  });
+
   return {
     userData,
     isUserFetching,
     isUserLoading,
     refetchUser,
+    userProfileData,
+    isUserProfileLoading,
+    isUserProfileFetching,
+    refetchUserProfile,
   };
 };
 

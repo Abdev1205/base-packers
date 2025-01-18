@@ -102,7 +102,7 @@ export interface UserDataApiRes {
   avatar: string;
   createdAt: Date;
   updatedAt: Date;
-  description?: string;
+  about?: string;
   starredTemplates: {
     id: string;
     name: string;
