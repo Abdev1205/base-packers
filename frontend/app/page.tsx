@@ -1,3 +1,4 @@
+import Footer from "@/components/custom/common/footer/Footer";
 import Navbar from "@/components/custom/common/nav/Navbar";
 import Faq from "@/components/custom/home/Faq";
 import { FeatureBento } from "@/components/custom/home/feature/Feature";
@@ -17,7 +18,8 @@ const Home = () => {
       <TabbedCarousel />
       <UserFeedback />
       <Faq />
-      <div className=" h-[200vh] "></div>
+      <Footer />
+      {/* <div className=" h-[200vh] "></div> */}
     </div>
   );
 };

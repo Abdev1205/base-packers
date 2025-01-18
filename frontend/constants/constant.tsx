@@ -137,3 +137,392 @@ export const techStack = [
     logo: "https://i.postimg.cc/L62WM41Z/rabbitmq-icon-1936x2048-zlik4nni.png",
   },
 ];
+
+export const techTags = [
+  { id: 1, name: "React JS", image: "https://i.postimg.cc/TY9H1Zbs/image.png" },
+  {
+    id: 2,
+    name: "Node JS",
+    image: "https://i.postimg.cc/KctWSK8x/nodejs-inner.webp",
+  },
+  {
+    id: 3,
+    name: "MongoDB",
+    image:
+      "https://i.postimg.cc/tRKGjQbG/d6e4b7bd3a0ae010ed3107618ee5128f5c6d919f-400x400.png",
+  },
+  { id: 4, name: "Next JS", image: "https://i.postimg.cc/W3qYWzhF/image.jpg" },
+  {
+    id: 5,
+    name: "PostgreSQL",
+    image: "https://i.postimg.cc/SQ73wXgC/postgress-logo.webp",
+  },
+  {
+    id: 6,
+    name: "Tailwind CSS",
+    image: "https://i.postimg.cc/rpwSgwf1/plus-tailwind.jpg",
+  },
+];
+
+export const templateCardData = [
+  {
+    id: "1",
+    title: "React Starter Kit",
+    description:
+      "A minimal React setup with Tailwind CSS and React Router preconfigured.",
+    tags: ["React", "TailwindCSS", "Firebase"],
+    stars: 125,
+    author: {
+      name: "Abhay Mishra",
+      profilePic: "https://example.com/profile-pic.jpg",
+      githubUrl: "https://github.com/Abdev1205",
+    },
+    repoUrl: "https://github.com/Abdev1205/react-starter-kit",
+    lastUpdated: "30-12-24",
+    badges: ["Trending", "New"],
+    actions: {
+      preview: "https://react-starter-kit-demo.com",
+      star: true,
+    },
+  },
+  {
+    id: "2",
+    title: "Vue Template Starter",
+    description:
+      "A clean starter template for Vue.js projects with Vuex and Vue Router.",
+    tags: ["Vue", "Vuex", "JavaScript"],
+    stars: 98,
+    author: {
+      name: "John Doe",
+      profilePic: "https://example.com/john-doe.jpg",
+      githubUrl: "https://github.com/johndoe",
+    },
+    repoUrl: "https://github.com/johndoe/vue-template-starter",
+    lastUpdated: "25-12-24",
+    badges: ["Trending"],
+    actions: {
+      preview: "https://vue-template-demo.com",
+      star: false,
+    },
+  },
+  {
+    id: "3",
+    title: "Next.js Boilerplate",
+    description: "A Next.js boilerplate with TailwindCSS and TypeScript setup.",
+    tags: ["Next.js", "TailwindCSS", "TypeScript"],
+    stars: 150,
+    author: {
+      name: "Jane Smith",
+      profilePic: "https://example.com/jane-smith.jpg",
+      githubUrl: "https://github.com/janesmith",
+    },
+    repoUrl: "https://github.com/janesmith/nextjs-boilerplate",
+    lastUpdated: "20-12-24",
+    badges: ["Top Pick"],
+    actions: {
+      preview: "https://nextjs-boilerplate-demo.com",
+      star: true,
+    },
+  },
+  {
+    id: "4",
+    title: "Angular Material Dashboard",
+    description: "A starter dashboard template using Angular Material.",
+    tags: ["Angular", "Material UI", "Dashboard"],
+    stars: 85,
+    author: {
+      name: "Michael Lee",
+      profilePic: "https://example.com/michael-lee.jpg",
+      githubUrl: "https://github.com/michaellee",
+    },
+    repoUrl: "https://github.com/michaellee/angular-dashboard",
+    lastUpdated: "15-12-24",
+    badges: ["Trending"],
+    actions: {
+      preview: "https://angular-dashboard-demo.com",
+      star: false,
+    },
+  },
+  {
+    id: "5",
+    title: "Node.js API Boilerplate",
+    description:
+      "A scalable Node.js boilerplate with Express and MongoDB integration.",
+    tags: ["Node.js", "Express", "MongoDB"],
+    stars: 200,
+    author: {
+      name: "Chris Brown",
+      profilePic: "https://example.com/chris-brown.jpg",
+      githubUrl: "https://github.com/chrisbrown",
+    },
+    repoUrl: "https://github.com/chrisbrown/nodejs-api-boilerplate",
+    lastUpdated: "10-12-24",
+    badges: ["Top Pick"],
+    actions: {
+      preview: "https://node-api-demo.com",
+      star: true,
+    },
+  },
+  {
+    id: "6",
+    title: "Flask Starter Kit",
+    description:
+      "A starter kit for building REST APIs with Flask and SQLAlchemy.",
+    tags: ["Flask", "Python", "SQLAlchemy"],
+    stars: 65,
+    author: {
+      name: "Olivia Martin",
+      profilePic: "https://example.com/olivia-martin.jpg",
+      githubUrl: "https://github.com/oliviamartin",
+    },
+    repoUrl: "https://github.com/oliviamartin/flask-starter-kit",
+    lastUpdated: "08-12-24",
+    badges: [],
+    actions: {
+      preview: "https://flask-starter-demo.com",
+      star: true,
+    },
+  },
+  {
+    id: "7",
+    title: "Django REST Framework Template",
+    description:
+      "A pre-configured Django project with DRF and JWT authentication.",
+    tags: ["Django", "Python", "DRF"],
+    stars: 72,
+    author: {
+      name: "Emily Clark",
+      profilePic: "https://example.com/emily-clark.jpg",
+      githubUrl: "https://github.com/emilyclark",
+    },
+    repoUrl: "https://github.com/emilyclark/django-drf-template",
+    lastUpdated: "05-12-24",
+    badges: ["New"],
+    actions: {
+      preview: "https://django-drf-demo.com",
+      star: false,
+    },
+  },
+  {
+    id: "8",
+    title: "Spring Boot Microservices",
+    description:
+      "A robust template for microservices with Spring Boot and Docker.",
+    tags: ["Spring Boot", "Microservices", "Java"],
+    stars: 145,
+    author: {
+      name: "Sophia Johnson",
+      profilePic: "https://example.com/sophia-johnson.jpg",
+      githubUrl: "https://github.com/sophiajohnson",
+    },
+    repoUrl: "https://github.com/sophiajohnson/spring-boot-microservices",
+    lastUpdated: "01-12-24",
+    badges: ["Top Pick", "Trending"],
+    actions: {
+      preview: "https://spring-boot-demo.com",
+      star: true,
+    },
+  },
+  {
+    id: "9",
+    title: "Go REST API Template",
+    description:
+      "A fast and secure REST API boilerplate using Go and Gin framework.",
+    tags: ["Go", "REST API", "Gin"],
+    stars: 88,
+    author: {
+      name: "Liam White",
+      profilePic: "https://example.com/liam-white.jpg",
+      githubUrl: "https://github.com/liamwhite",
+    },
+    repoUrl: "https://github.com/liamwhite/go-rest-api",
+    lastUpdated: "28-11-24",
+    badges: ["Trending"],
+    actions: {
+      preview: "https://go-rest-api-demo.com",
+      star: false,
+    },
+  },
+  {
+    id: "10",
+    title: "Rust Web Server Template",
+    description: "A lightweight and performant web server boilerplate in Rust.",
+    tags: ["Rust", "Web Server", "Actix"],
+    stars: 78,
+    author: {
+      name: "Noah Walker",
+      profilePic: "https://example.com/noah-walker.jpg",
+      githubUrl: "https://github.com/noahwalker",
+    },
+    repoUrl: "https://github.com/noahwalker/rust-web-server",
+    lastUpdated: "25-11-24",
+    badges: [],
+    actions: {
+      preview: "https://rust-web-server-demo.com",
+      star: true,
+    },
+  },
+  {
+    id: "11",
+    title: "Rust Web Server Template",
+    description: "A lightweight and performant web server boilerplate in Rust.",
+    tags: ["Rust", "Web Server", "Actix"],
+    stars: 78,
+    author: {
+      name: "Noah Walker",
+      profilePic: "https://example.com/noah-walker.jpg",
+      githubUrl: "https://github.com/noahwalker",
+    },
+    repoUrl: "https://github.com/noahwalker/rust-web-server",
+    lastUpdated: "25-11-24",
+    badges: [],
+    actions: {
+      preview: "https://rust-web-server-demo.com",
+      star: true,
+    },
+  },
+  {
+    id: "12",
+    title: "Rust Web Server Template",
+    description: "A lightweight and performant web server boilerplate in Rust.",
+    tags: ["Rust", "Web Server", "Actix"],
+    stars: 78,
+    author: {
+      name: "Noah Walker",
+      profilePic: "https://example.com/noah-walker.jpg",
+      githubUrl: "https://github.com/noahwalker",
+    },
+    repoUrl: "https://github.com/noahwalker/rust-web-server",
+    lastUpdated: "25-11-24",
+    badges: [],
+    actions: {
+      preview: "https://rust-web-server-demo.com",
+      star: true,
+    },
+  },
+];
+
+export const heroSkillsAvatarData = [
+  {
+    id: 1,
+    name: "React Js",
+    imageUrl: "https://i.postimg.cc/TY9H1Zbs/image.png",
+  },
+  {
+    id: 2,
+    name: "Node JS",
+    imageUrl: "https://i.postimg.cc/KctWSK8x/nodejs-inner.webp",
+  },
+  {
+    id: 3,
+    name: "MongoDB",
+    imageUrl:
+      "https://i.postimg.cc/tRKGjQbG/d6e4b7bd3a0ae010ed3107618ee5128f5c6d919f-400x400.png",
+  },
+  {
+    id: 4,
+    name: "Next JS",
+    imageUrl: "https://i.postimg.cc/W3qYWzhF/image.jpg",
+  },
+  {
+    id: 5,
+    name: "PostgreSQL",
+    imageUrl: "https://i.postimg.cc/SQ73wXgC/postgress-logo.webp",
+  },
+  {
+    id: 6,
+    name: "Tailwind CSS",
+    imageUrl: "https://i.postimg.cc/rpwSgwf1/plus-tailwind.jpg",
+  },
+];
+
+export const DefaultGuidelines = `
+## Template Overview
+Welcome to the [Template Name] template! This template is designed to help you [brief purpose, e.g., "quickly set up a blog using React.js and Tailwind CSS"]. Below, you'll find everything you need to get started.
+
+---
+
+## Key Features
+- **Feature 1**: [Brief description, e.g., "Responsive design for all devices."]
+- **Feature 2**: [Brief description, e.g., "Preconfigured with ESLint and Prettier for consistent code style."]
+- **Feature 3**: [Brief description, e.g., "Includes reusable components for forms, modals, and navigation."]
+
+---
+
+## Getting Started
+### Prerequisites
+Ensure you have the following installed on your system:
+- Node.js (version 14 or higher)
+- npm or yarn
+- Git
+
+### Installation
+1. Clone the repository:
+   \`\`\`bash
+   git clone <repository-url>
+   \`\`\`
+2. Navigate to the template directory:
+   \`\`\`bash
+   cd <template-name>
+   \`\`\`
+3. Install dependencies:
+   \`\`\`bash
+   npm install
+   \`\`\`
+4. Start the development server:
+   \`\`\`bash
+   npm start
+   \`\`\`
+
+---
+
+## Usage Instructions
+1. Update the configuration file:
+   - Open \`config.js\` and update [specific settings, e.g., API keys, environment variables].
+2. Customize styles:
+   - Modify styles in the \`/styles\` directory as needed.
+3. Add your content:
+   - Update components or pages in the \`/src\` folder to suit your needs.
+
+---
+
+## Folder Structure
+\`\`\`
+📁 src
+   ├── 📁 components       # Prebuilt components
+   ├── 📁 pages            # Default pages included
+   ├── 📁 assets           # Images, fonts, and other assets
+   ├── 📁 styles           # Global and component-specific styles
+   └── 📄 index.js         # Entry point
+\`\`\`
+
+---
+
+## Customization
+Feel free to customize this template to fit your requirements:
+- Add new pages or components to \`/src/pages\` or \`/src/components\`.
+- Replace default assets in the \`/src/assets\` folder.
+- Adjust global styles in \`/src/styles/global.css\`.
+
+---
+
+## FAQs
+**Q: How do I deploy this template?**  
+A: Build the project and deploy the \`/build\` folder to your hosting provider:
+   \`\`\`bash
+   npm run build
+   \`\`\`
+
+**Q: Can I use this template commercially?**  
+A: Please refer to the [LICENSE](#) section for usage terms.
+
+---
+
+## Support
+If you encounter issues or have questions, feel free to open an issue in the repository or contact the template creator.
+
+---
+
+## License
+This template is licensed under [License Name]. Refer to the LICENSE file for details.
+`;
