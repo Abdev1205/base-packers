@@ -9,3 +9,5 @@
 2025-01-08 11:34:39:3439 [31merror[39m: [31mRequest failed with status code 404[39m
 2025-01-08 23:20:57:2057 [31merror[39m: [31mgetaddrinfo ENOTFOUND api.github.com[39m
 2025-01-13 22:16:08:168 [31merror[39m: [31mRequest failed with status code 404[39m
+2025-01-18 11:18:48:1848 [31merror[39m: [31mCannot read properties of undefined (reading 'split')[39m
+2025-01-18 11:29:13:2913 [31merror[39m: [31mRequest failed with status code 401[39m

@@ -40,8 +40,10 @@ class AuthController {
         });
 
         console.log({ message: "GitHub token stored successfully." });
+        return token;
       } else {
         console.log({ message: "Failed to fetch GitHub token." });
+        return null;
       }
     } catch (error) {
       console.error("Error updating GitHub token in Clerk:", error);
