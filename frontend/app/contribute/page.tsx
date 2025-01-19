@@ -74,7 +74,8 @@ const MultiPageForm = () => {
   const [repoSelected, setRepoSelected] = useState<GitRepo | null>(null);
   const { repo } = useRepo(
     user?.publicMetadata?.githubToken as string,
-    isLoaded as boolean
+    isLoaded as boolean,
+    user?.id as string
   );
 
   const form = useForm<z.infer<typeof formSchema>>({

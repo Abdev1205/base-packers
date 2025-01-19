@@ -4,13 +4,13 @@ import api from "@/config/api";
 import ENV from "@/config/ENV";
 import toast from "react-hot-toast";
 
-const getAllRepo = async (token: string) => {
+const getAllRepo = async (token: string, userId: string) => {
   try {
     console.log("get all repo called");
-    if (!token) {
+    if (!token && !userId) {
       return;
     }
-    const res = await api.get(ENV.REPO_API_URL as string, {
+    const res = await api.get(`${ENV.REPO_API_URL as string}/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: "application/vnd.github.v3+json",
