@@ -4,7 +4,7 @@ import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 
-const useRepo = (token: string, isLoaded: boolean) => {
+const useRepo = (token: string, isLoaded: boolean, userId: string) => {
   const { addRepos, gitRepo } = useRepoStore();
 
   const {
@@ -14,7 +14,7 @@ const useRepo = (token: string, isLoaded: boolean) => {
   } = useQuery({
     queryKey: ["repo", token],
     queryFn: async () => {
-      const fetchedRepo = await getAllRepo(token);
+      const fetchedRepo = await getAllRepo(token, userId);
       addRepos(fetchedRepo?.data || []);
       return fetchedRepo;
     },
