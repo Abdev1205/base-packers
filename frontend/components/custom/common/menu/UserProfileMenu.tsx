@@ -64,7 +64,10 @@ const UserProfileMenu = () => {
             <PiUserCircleGearFill className="text-[1rem] " />
             View Profile
           </DropdownMenuItem>
-          <DropdownMenuItem className="px-4 py-2 text-sm text-white/60 focus:bg-neutral-700 focus:text-white/60 cursor-pointer hover:bg-red-700">
+          <DropdownMenuItem
+            onClick={() => handleSignOut()}
+            className="px-4 py-2 text-sm text-white/60 focus:bg-neutral-700 focus:text-white/60 cursor-pointer hover:bg-red-700"
+          >
             <div
               onClick={() => handleSignOut()}
               className="flex items-center gap-[.5rem] "
