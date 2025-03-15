@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
 
-const SITE_URL = "https://basepackers.vercel.app/";
+const SITE_URL = "https://basepackers.vercel.app";
 
 async function getAllTemplateSlugs() {
   try {
-    const res = await fetch(`${SITE_URL}/api/v1/templates`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/templates`
+    );
     const { data } = await res.json();
 
     const slugs = data.map((item: any) => item.id);
@@ -18,7 +20,7 @@ async function getAllTemplateSlugs() {
 
 export async function GET() {
   try {
-    const staticUrls = ["", "templates", "submit", "blog", "about"];
+    const staticUrls = ["", "templates", "blog", "about"];
     const templateSlugs = await getAllTemplateSlugs(); // Fetch dynamic slugs
     console.log("templateSlugs", templateSlugs);
 
