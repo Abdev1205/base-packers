@@ -15,6 +15,14 @@ export const metadata: Metadata = {
   verification: {
     google: "0U3Gt4Ivo_EED11zL8wjf-4O6oMSmQo1jdsv7_IVflM",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
   openGraph: {
     title: "Base Packer - Discover & Share Starter Templates",
     description:
