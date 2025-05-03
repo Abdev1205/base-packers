@@ -22,7 +22,7 @@ const TemplatePage = () => {
 
   useEffect(() => {
     refetchTemplate();
-  }, [templateData]);
+  }, [templateData, refetchTemplate]);
 
   return (
     <>

@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { SkillTagtype } from "@/types";
 import { X } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
 
 interface TechTagSelectProps {
   tags: SkillTagtype[];
@@ -30,8 +30,15 @@ const TechTagSelect: React.FC<TechTagSelectProps> = ({
   handleInputFocus,
   isLabled = true,
 }) => {
+  const componentRef = useRef<HTMLDivElement>(null);
+
+  // Stop click propagation to prevent parent handlers from firing
+  const handleContainerClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
   return (
-    <div>
+    <div ref={componentRef} onClick={handleContainerClick}>
       <div className="relative mb-4">
         <h2
           className={` ${
