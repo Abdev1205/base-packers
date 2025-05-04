@@ -2,12 +2,20 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { CreateShare } from "./CreateShare";
+import dynamic from "next/dynamic";
+import FeatureDemo from "./FeatureDemo";
+
+// Use dynamic import with no SSR to avoid hydration issues
+const VideoFeature = dynamic(() => import("./VideoFeature"), { ssr: false });
 
 const TabbedCarousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [isInView, setIsInView] = useState(false);
+  const [isAutoAdvancing, setIsAutoAdvancing] = useState(true);
   const carouselRef = useRef(null);
+
+  const slideDurations = [31, 29, 10, 8];
 
   const content = [
     {
@@ -15,37 +23,45 @@ const TabbedCarousel = () => {
       description:
         "Easily link GitHub repositories to create and share starter packages with auto-fetched details.",
       type: "component",
-      component: <CreateShare />,
+      src: "https://app.supademo.com/embed/cma8ey8kn5oei13m0nhr2asfj?embed_v=2",
+      duration: slideDurations[0],
     },
     {
       title: "Discover Tailored Templates",
       description:
         "Find templates curated for your tech stack using filters and tags for quick discovery.",
-      type: "image",
-      image: "/api/placeholder/800/600",
+      type: "component",
+      src: "https://app.supademo.com/embed/cma88w0215mv613m0yme9lpmt?v_email=EMAIL&embed_v=2",
+      duration: slideDurations[1],
     },
     {
       title: "Save and Spotlight",
       description:
         "Bookmark favorite templates and spotlight standout repositories for easy access.",
-      type: "image",
-      image: "/api/placeholder/800/600",
+      type: "component",
+      src: "https://app.supademo.com/embed/cma9lc8co5w8e13m06wfsblce?v_email=EMAIL&embed_v=2",
+      duration: slideDurations[2],
     },
     {
       title: "Seamless Documentation Access",
       description:
         "Quickly view guides, usage instructions, and notes with our embedded markdown viewer.",
-      type: "image",
-      image: "/api/placeholder/800/600",
+      type: "component",
+      src: "https://app.supademo.com/embed/cma9lnjpg5wig13m0uba29iot?v_email=EMAIL&embed_v=2",
+      duration: slideDurations[3],
     },
   ];
+
+  useEffect(() => {
+    setProgress(0);
+  }, [activeIndex]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsInView(entry.isIntersecting);
       },
-      { threshold: 0.5 } // Adjust threshold to control how much of the component must be visible
+      { threshold: 0.5 }
     );
 
     if (carouselRef.current) {
@@ -59,8 +75,13 @@ const TabbedCarousel = () => {
     };
   }, []);
 
+  const currentSlideDuration = content[activeIndex]?.duration || 10;
+
   useEffect(() => {
-    if (!isInView) return;
+    if (!isInView || !isAutoAdvancing) return;
+
+    // Calculate the interval based on current slide's duration
+    const intervalDuration = (currentSlideDuration * 1000) / 100;
 
     const interval = setInterval(() => {
       if (progress < 100) {
@@ -69,15 +90,30 @@ const TabbedCarousel = () => {
         setActiveIndex((prevIndex) => (prevIndex + 1) % content.length);
         setProgress(0);
       }
-    }, 110);
+    }, intervalDuration);
 
     return () => clearInterval(interval);
-  }, [progress, isInView, content.length]);
+  }, [
+    progress,
+    isInView,
+    isAutoAdvancing,
+    content.length,
+    currentSlideDuration,
+  ]);
+
+  const handleTabClick = (index: any) => {
+    setActiveIndex(index);
+    setProgress(0);
+
+    setIsAutoAdvancing(false);
+    const timer = setTimeout(() => setIsAutoAdvancing(true), 10000);
+    return () => clearTimeout(timer);
+  };
 
   return (
-    <div ref={carouselRef} className="flex h-screen mt-[8rem] px-[5rem] ">
-      <div className=" mx-auto  w-full">
-        <div className=" w-full  justify-center text-center ">
+    <div ref={carouselRef} className="flex h-screen mt-[8rem] px-[5rem]">
+      <div className="mx-auto w-full">
+        <div className="w-full justify-center text-center">
           <span className="bg-gradient-to-br from-white from-30% to-white/40 bg-clip-text leading-none tracking-tighter text-transparent text-[2.5rem] mt-[2rem] mb-[4rem] animate-fade-in py-[1rem] [--animation-delay:200ms] font-poppins font-[600] w-full">
             What We Offer
           </span>
@@ -87,10 +123,7 @@ const TabbedCarousel = () => {
           <div className="w-[40%] cursor-pointer text-white flex flex-col justify-center">
             {content.map((item, index) => (
               <div
-                onClick={() => {
-                  setActiveIndex(index);
-                  setProgress(0);
-                }}
+                onClick={() => handleTabClick(index)}
                 key={index}
                 className="flex h-[8rem] items-center gap-6"
               >
@@ -113,8 +146,8 @@ const TabbedCarousel = () => {
                     className={`text-xl font-medium ${
                       index === activeIndex
                         ? "text-white"
-                        : "text-gray-500 hover:text-white/80  "
-                    } font-openSans text-[1.3rem] duration-200 `}
+                        : "text-gray-500 hover:text-white/80"
+                    } font-openSans text-[1.3rem] duration-200`}
                   >
                     {item.title}
                   </h3>
@@ -124,28 +157,16 @@ const TabbedCarousel = () => {
             ))}
           </div>
 
-          <div className="w-[60%] relative rounded-xl overflow-hidden">
-            {content.map((item, index) => (
-              <div
-                key={index}
-                className={` flex h-full inset-0  transition-opacity duration-500 ${
-                  activeIndex === index ? "opacity-100" : "opacity-0"
-                }`}
-              >
-                {/* Placeholder for images */}
-                {item.type === "image" && (
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover"
-                  />
-                )}
-
-                {/* Placeholder for components */}
-                {item.type === "component" && item.component}
-                {/* <div className="w-full h-full bg-white"></div> */}
-              </div>
-            ))}
+          <div className="w-[60%] relative rounded-xl overflow-hidden h-fit min-h-[35rem]">
+            {/* Only render the active content */}
+            <div className="w-full h-full bg-transparent flex items-center">
+              {content[activeIndex].type === "component" && (
+                <FeatureDemo
+                  src={content[activeIndex].src}
+                  key={`demo-${activeIndex}`}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>
