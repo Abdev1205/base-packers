@@ -26,10 +26,14 @@ body {
   :root {
     --radius: 0.5rem;
   }
+
+  .theme {
+    --animate-shine: shine var(--duration) infinite linear;
+  }
 }
 
 .shadow__btn {
-  box-shadow: 0 0 25px rgb(0, 140, 255);
+  box-shadow: 0 0 25px #008cff;
 }
 
 .shadow__btn:hover {
@@ -58,4 +62,64 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+@keyframes border-flow {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.border-glow {
+  position: relative;
+}
+
+.border-glow::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(90deg, #008cff, #49b3ff, #0066bb, #008cff);
+  background-size: 400% 400%;
+  border-radius: inherit;
+  z-index: -1;
+  animation: border-flow 8s ease infinite;
+  filter: blur(8px);
+}
+
+/* Optional - Add this class to your component for an additional animation effect */
+.border-glow-animate::before {
+  animation: border-flow 8s ease infinite;
+}
+
+@theme inline {
+  @keyframes shine {
+    0% {
+      background-position: 0% 0%;
+    }
+
+    50% {
+      background-position: 100% 100%;
+    }
+
+    to {
+      background-position: 0% 0%;
+    }
+  }
+}
+
+.blue-glow-bg {
+  /* border-radius: 12px; */
+  border: 1px solid var(--primary-btn, #008cff);
+  /* background: var(--Secondary-bg, #101935); */
+  background: transparent;
+  /* box-shadow: 0px 0px 150px 0px #008cff68; */
 }
